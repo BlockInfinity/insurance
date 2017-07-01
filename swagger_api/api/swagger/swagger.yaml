@@ -1,0 +1,310 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Insurance Api
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /contractfactory/createEarthQuakeContract:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: creation_controller
+    post:
+      tags: 
+        - insurer
+      description: " "
+      # used as the method name of the controller
+      operationId: create
+      parameters:
+        - name: createRequest
+          in: body
+          description: ""
+          required: true
+          schema: 
+            $ref: "#/definitions/createRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/createResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /contractfactory/getEarthQuakeContract:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: info_controller
+    get:
+      tags:
+        - customer
+      description: " "
+      # used as the method name of the controller
+      operationId: getEQContract
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/getEQContractResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /eqcontract/requestInsurance:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: insurance_controller
+    post:
+      tags:
+        - customer
+      description: " "
+      # used as the method name of the controller
+      operationId: requestInsurance
+      parameters:
+        - name: requestInsuranceRequest
+          in: body
+          description: ""
+          required: true
+          schema: 
+            $ref: "#/definitions/requestInsuranceRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/SuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /eqcontract/confirmInsurance:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: insurance_controller
+    post:
+      tags:
+        - customer
+      description: " "
+      # used as the method name of the controller
+      operationId: confirm
+      parameters:
+        - name: confirmRequest
+          in: body
+          description: ""
+          required: true
+          schema: 
+            $ref: "#/definitions/confirmRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/SuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /eqcontract/triggerInsurance:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: insurance_controller
+    post:
+      tags:
+        - customer
+      description: " "
+      # used as the method name of the controller
+      operationId: trigger
+      parameters:
+        - name: triggerRequest
+          in: body
+          description: ""
+          required: true
+          schema: 
+            $ref: "#/definitions/triggerRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/triggerRespone"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /eqcontract/acceptInsurance:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: insurance_controller
+    post:
+      tags:
+        - insurer
+      description: " "
+      # used as the method name of the controller
+      operationId: accept
+      parameters:
+        - name: acceptRequest
+          in: body
+          description: ""
+          required: true
+          schema: 
+            $ref: "#/definitions/acceptRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/SuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /eqcontract/lockCollateral:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: insurance_controller
+    post:
+      tags:
+        - insurer
+      description: " "
+      # used as the method name of the controller
+      operationId: lockCollateral
+      parameters:
+        - name: lockCollateralRequest
+          in: body
+          description: ""
+          required: true
+          schema: 
+            $ref: "#/definitions/lockCollateralRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/SuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /eqcontract/closeInsurance:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: insurance_controller
+    post:
+      tags:
+        - insurer
+      description: " "
+      # used as the method name of the controller
+      operationId: close
+      parameters:
+        - name: closeRequest
+          in: body
+          description: ""
+          required: true
+          schema: 
+            $ref: "#/definitions/closeRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/closeResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+            
+
+
+# complex objects have schema definitions
+definitions:
+  SuccessResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  createRequest:
+    properties:
+      address:
+        type: string
+      duration:
+        type: number
+  createResponse:
+    properties:
+      address:
+        type: string
+  getEQContractResponse:
+    properties:
+      address:
+        type: string
+  requestInsuranceRequest:
+    properties:
+      eqcontract:
+        type: string
+      strength:
+        type: number
+      geolocation:
+        type: string
+      value:
+        type: number
+      duration:
+        type: number
+  confirmRequest:
+   properties:
+      address:
+        type: string
+      ether:
+        type: number
+  triggerRequest:
+    properties:
+      address:
+        type: string
+  triggerRespone:
+    properties:
+      ether:
+        type: number
+  acceptRequest:
+    properties:
+      eqcontract:
+        type: string
+      costs:
+        type: number
+  lockCollateralRequest:
+    properties:
+      ether:
+        type: number
+  closeResponse:
+    properties:
+      ether:  
+        type: number
+  closeRequest:
+    properties:
+      address:
+        type: string
+      
+        
+  
+
+    
+  
