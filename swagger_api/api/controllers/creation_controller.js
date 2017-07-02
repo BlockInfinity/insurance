@@ -18,7 +18,7 @@ module.exports = {
             console.log(web3.factory.createEarthQuakeContract);
             console.log(web3.factory.address);
 
-            web3.factory.createEarthQuakeContract({ from: eth.accounts[0], gas: 8000000 });
+            web3.factory.createEarthQuakeContract({ from: address , gas: 8000000 });
 
             web3.factory.EQContractCreation(function(error, result) {
                 var contractAddress = result.args._eqcontract;

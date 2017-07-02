@@ -19,7 +19,7 @@ module.exports = {
             if (yourAddress == "string") {
                 yourAddress = web3.eth.accounts[1];
             }
-            console.log(123213123)
+            // console.log(123213123)
             // console.log(eqcontract, 123123)
 
             var contract = web3.eqcontract_contract.at(eqcontract);
@@ -32,18 +32,25 @@ module.exports = {
                 var _value = result.args._value;
                 var _duration = result.args._duration;
 
-                db.eqcontracts.modify({ "customer": yourAddress, "strength": strength, "duration": duration, "geolocation": geolocation, "value": value }).make(function(builder) {
+                db.eqcontracts.modify({ "customer": yourAddress, "strength": strength, "duration": duration, "geolocation": geolocation, "value": value, "status": "requested" }).make(function(builder) {
                     // builder.first(); --> modifies only one document
                     builder.where('eqcontract', eqcontract);
                     builder.callback(function(err, count) {
                         console.log('modified documents:', count);
+
+
+
+
+
+                        db.getEQContractInfo(eqcontract).then(function(result) {
+                            res.statusCode = 200;
+                            res.end(JSON.stringify(result));
+                        }, function(reason) {
+                            res.statusCode = 500;
+                            res.end('db error', reason);
+                        })
                     });
                 });
-
-
-
-                res.statusCode = 200;
-                res.end(JSON.stringify({ "strength": _strength, "geolocation": _geolocation, "value": _value, "duration": _duration }));
             })
 
         } catch (error) {
@@ -80,11 +87,18 @@ module.exports = {
                     builder.where('eqcontract', eqcontract);
                     builder.callback(function(err, count) {
                         console.log('modified documents:', count);
+
+                        db.getEQContractInfo(eqcontract).then(function(result) {
+                            res.statusCode = 200;
+                            res.end(JSON.stringify(result));
+                        }, function(reason) {
+                            res.statusCode = 500;
+                            res.end('db error', reason);
+                        })
                     });
+
                 });
 
-                res.statusCode = 200;
-                res.end(JSON.stringify({ "paid": _paid, "from": _from }));
             })
 
 
@@ -121,12 +135,20 @@ module.exports = {
                     builder.where('eqcontract', eqcontract);
                     builder.callback(function(err, count) {
                         console.log('modified documents:', count);
+
+
+
+                        db.getEQContractInfo(eqcontract).then(function(result) {
+                            res.statusCode = 200;
+                            res.end(JSON.stringify(result));
+                        }, function(reason) {
+                            res.statusCode = 500;
+                            res.end('db error', reason);
+                        })
                     });
+
                 });
 
-
-                res.statusCode = 200;
-                res.end(JSON.stringify({ "_costs": _costs }));
             })
 
 
@@ -162,11 +184,19 @@ module.exports = {
                     builder.where('eqcontract', eqcontract);
                     builder.callback(function(err, count) {
                         console.log('modified documents:', count);
+
+
+
+
+                        db.getEQContractInfo(eqcontract).then(function(result) {
+                            res.statusCode = 200;
+                            res.end(JSON.stringify(result));
+                        }, function(reason) {
+                            res.statusCode = 500;
+                            res.end('db error', reason);
+                        })
                     });
                 });
-
-                res.statusCode = 200;
-                res.end(JSON.stringify({ "collateral": _collateral }));
             })
 
 
@@ -201,11 +231,19 @@ module.exports = {
                     builder.where('eqcontract', eqcontract);
                     builder.callback(function(err, count) {
                         console.log('modified documents:', count);
-                    });
-                });
 
-                res.statusCode = 200;
-                res.end(JSON.stringify({ "collateral": _collateral }));
+
+
+                        db.getEQContractInfo(eqcontract).then(function(result) {
+                            res.statusCode = 200;
+                            res.end(JSON.stringify(result));
+                        }, function(reason) {
+                            res.statusCode = 500;
+                            res.end('db error', reason);
+                        })
+                    });
+
+                });
             })
 
 
@@ -241,12 +279,19 @@ module.exports = {
                     builder.where('eqcontract', eqcontract);
                     builder.callback(function(err, count) {
                         console.log('modified documents:', count);
+
+
+
+
+                        db.getEQContractInfo(eqcontract).then(function(result) {
+                            res.statusCode = 200;
+                            res.end(JSON.stringify(result));
+                        }, function(reason) {
+                            res.statusCode = 500;
+                            res.end('db error', reason);
+                        })
                     });
                 });
-
-
-                res.statusCode = 200;
-                res.end(JSON.stringify({ "collateral": _collateral }));
             })
 
 
