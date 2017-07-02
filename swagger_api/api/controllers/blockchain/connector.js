@@ -45,6 +45,7 @@ try {
 
 
     var eqcontract_contract = web3.eth.contract(abi_eqcontract)
+    web3.eqcontract_contract = eqcontract_contract;
     var eqcontract = eqcontract_contract.at(addresses.EarthQuakeContract)
     web3.eqcontract =  eqcontract;
 

@@ -16,7 +16,7 @@ contract EarthQuakeContract {
     bool public initial = true;
     
     event insuranceRequest(uint _strength,string _geolocation,uint  _value,uint _duration);
-    event confirmEvent(uint _costs);
+    event confirmEvent(uint _paid, address _from);
     event triggerEvent(bool _success, uint _collateral);
     event acceptEvent(uint _costs);
     event isActiveEvent(uint _collateral);
@@ -38,7 +38,7 @@ contract EarthQuakeContract {
     }
     
     // customer
-    function request(uint _strength, string _geolocation, uint  _value, uint _duration) onlyInitial() {
+    function request(uint _strength, string _geolocation, uint  _value, uint _duration) /*onlyInitial()*/ {
         initial = false;
         customer = msg.sender;
         strength = _strength;
@@ -51,7 +51,7 @@ contract EarthQuakeContract {
     function confirm() payable {
         if (msg.value < costs) {throw;}
         insurer.transfer(msg.value);
-        confirmEvent(costs);
+        confirmEvent(msg.value, msg.sender);
     }
     
     // eigt sendet __callback geld an customer
