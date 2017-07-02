@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, Button, Picker, TextInput, ActivityIndicator, ListView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Button, Picker, TextInput, ActivityIndicator, ListView, Alert } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-const ENDPOINT = 'http://65.52.158.220:8081'
+const ENDPOINT = 'http://localhost:8081'
 
 class Login extends React.Component {
   static navigationOptions = {
@@ -12,25 +12,61 @@ class Login extends React.Component {
       backgroundColor: 'blue', 
       elevation: null,
     }
-  };
+  }
 
   constructor(props) {
     super(props);
     this.state = {
-      account: 0
-    };
+      isLoading: true
+    }
+  }
+
+  componentDidMount() {
+    return fetch(ENDPOINT + '/getAccounts')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+        this.setState({
+          isLoading: false,
+          insurant: responseJson.insurant,
+          insurer: responseJson.insurer
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+        this.setState({
+          isLoading: false
+        }, function() {
+          Alert.alert(
+            'Error',
+            'An error occured while fetching accounts! Please try again in a few seconds.',
+            [
+              {text: 'OK', onPress: () => console.log('OK Pressed')}
+            ],
+            { cancelable: false }
+          )
+        })
+      })
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={{flex: 1, paddingTop: 20}}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
     const { navigate } = this.props.navigation;
     return (
       <View style={Styles.container}>
         <Text style={Styles.baseText1}>Insurant</Text>
-        <Button style={Styles.item} onPress={() => navigate('InsurantHome')} title={'Go to Insurant Home'}/>
+        <Button style={Styles.item} onPress={() => navigate('InsurantHome', { insurantAddress: this.state.insurant })} title={'Go to Insurant Home'}/>
         <Text style={Styles.baseText1}>Insurer</Text>
-        <Button style={Styles.item} onPress={() => navigate('InsurerHome')} title={'Go to Insurer Home'}/>
+        <Button style={Styles.item} onPress={() => navigate('InsurerHome', { insurerAddress: this.state.insurer })} title={'Go to Insurer Home'}/>
       </View>
-    );
+    )
   }
 }
 
@@ -42,39 +78,68 @@ class InsurantHome extends React.Component {
       backgroundColor: 'blue', 
       elevation: null,
     }
-  };
+  }
 
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
-      account: 10,
-      dataSource: [
-        {key: '12AB', state: 'Requested'},
-        {key: '13AB', state: 'Accepted'},
-        {key: '14AB', state: 'Confirmed'},
-        {key: '15AB', state: 'Accepted'},
-        {key: '16AB', state: 'Confirmed'}
-      ]
-    };
+      balance: 0,
+      dataSource: []
+    }
   }
 
   componentDidMount() {
-    //!!!! do be removed
-    this.setState({
-      isLoading: false,
-    })
-    return
-    //!!!! do be removed
-
-    return fetch(ENDPOINT + '/allInsurances')
+    const { params } = this.props.navigation.state
+    return fetch(ENDPOINT + '/getBalance', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          yourAddress: params.insurantAddress
+        })
+      })
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson)
-        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.setState({
-          isLoading: false,
-          dataSource: ds.cloneWithRows(responseJson.insurances),
+          balance: responseJson
+        }, () => {
+          return fetch(ENDPOINT + '/allMyInsurances', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              yourAddress: params.insurantAddress
+            })
+          })
+          .then((response) => response.json())
+          .then((responseJson) => {
+            console.log(responseJson)
+            this.setState({
+              isLoading: false,
+              dataSource: responseJson
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            this.setState({
+              isLoading: false
+            }, function() {
+              Alert.alert(
+                'Error',
+                'An error occured while fetching all my insurances! Please try again in a few seconds.',
+                [
+                  {text: 'OK', onPress: () => console.log('OK Pressed')}
+                ],
+                { cancelable: false }
+              )
+            });
+          });
         });
       })
       .catch((error) => {
@@ -84,7 +149,7 @@ class InsurantHome extends React.Component {
         }, function() {
           Alert.alert(
             'Error',
-            'An error occured while fetching all insurances! Please try again in a few seconds.',
+            'An error occured while fetching account balance! Please try again in a few seconds.',
             [
               {text: 'OK', onPress: () => console.log('OK Pressed')}
             ],
@@ -103,19 +168,20 @@ class InsurantHome extends React.Component {
       );
     }
 
-    const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation
+    const { params } = this.props.navigation.state
     return (
       <View style={Styles.container}>
         <Text style={Styles.baseText1}>Account:</Text>
-        <Text style={Styles.baseText3}>{this.state.account}</Text>
+        <Text style={Styles.baseText3}>{this.state.balance}</Text>
         <Text style={Styles.baseText4}>Insurances:</Text>
         <FlatList style={Styles.list}
           data={this.state.dataSource}
           renderItem={({item}) => 
-            <Button style={Styles.item} onPress={() => navigate('InsurantInsurance', item)} title={'Insurance: ' + item.key + ' State: ' + item.state}/>
+            <Button style={Styles.item} onPress={() => navigate('InsurantInsurance', { insurance: item, insurantAddress: params.insurantAddress })} title={'Insurance: ' + item.key + ' State: ' + item.state}/>
           }
         />
-        <Button style={Styles.item} onPress={() => navigate('InsurantInsurance')} title={'New Insurance'}/>
+        <Button style={Styles.item} onPress={() => navigate('InsurantInsurance', { insurantAddress: params.insurantAddress })} title={'New Insurance'}/>
       </View>
     );
   }
@@ -143,8 +209,9 @@ class InsurantInsurance extends React.Component {
       strength: params && params.insurance ? params.insurance.strength : 0,
       value: params && params.insurance ? params.insurance.value : 0,
       duration: params && params.insurance ? params.insurance.duration : 1,
-      geolocation: 12,
+      geolocation: '12',
       state: params && params.insurance ? params.insurance.state : 'new',
+      contractAddress: params && params.insurance ? params.insurance.address : null,
       strengthList: [
         {key: 'Niedrig', value: 0},
         {key: 'Mittel', value: 1},
@@ -161,13 +228,6 @@ class InsurantInsurance extends React.Component {
   }
 
   onPress() {
-    const { navigate } = this.props.navigation
-
-    //!!!! do be removed
-    navigate('InsurantHome')
-    return
-    //!!!! do be removed
-
     // check if some other action is currently processing
     if (this.state.isLoading) {
       Alert.alert(
@@ -185,19 +245,23 @@ class InsurantInsurance extends React.Component {
     // push to server
     //////
 
+    const { navigate } = this.props.navigation
+    const { params } = this.props.navigation.state
+
     // state == 'new'
     // -> request new insurance
     if (this.state.state === 'new') {
       this.setState({
         isLoading: true
       }, () => {
-        return fetch(ENDPOINT + '/requestInsurance', {
+        return fetch(ENDPOINT + '/eqcontract/requestInsurance', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
+            yourAddress: params.insurantAddress,
             strength: this.state.strength,
             value: this.state.value,
             duration: this.state.duration,
@@ -244,14 +308,96 @@ class InsurantInsurance extends React.Component {
       this.setState({
         isLoading: true
       }, () => {
-        return fetch(ENDPOINT + '/confirmInsurance', {
+        return fetch(ENDPOINT + '/eqcontract/getCosts', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              eqcontract: this.state.contractAddress
+            })
+          })
+          .then((response) => response.json())
+          .then((responseJson) => {    
+            console.log(responseJSON)
+            return fetch(ENDPOINT + '/eqcontract/confirmInsurance', {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                yourAddress: params.insurantAddress,
+                eqcontract: this.state.contractAddress,
+                ether: responseJSON.costs
+              })
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+              console.log(responseJson)
+              this.setState({
+                isLoading: false
+              }, () => {
+                Alert.alert(
+                  'Success',
+                  'Insurance confirmed!',
+                  [
+                    {text: 'OK', onPress: () => navigate('InsurantHome')}
+                  ],
+                  { cancelable: false }
+                )
+              })
+            })
+            .catch((error) => {
+              console.log(error)
+              this.setState({
+                isLoading: false
+              }, () => {
+                Alert.alert(
+                  'Error',
+                  'Insurance could not be confirmed! Please try again.',
+                  [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')}
+                  ],
+                  { cancelable: false }
+                )
+              })
+            });
+          })
+          .catch((error) => {
+            console.log(error)
+            this.setState({
+              isLoading: false
+            }, () => {
+              Alert.alert(
+                'Error',
+                'Insurance costs could not be retrieved! Please try again.',
+                [
+                  {text: 'OK', onPress: () => console.log('OK Pressed')}
+                ],
+                { cancelable: false }
+              )
+            })
+          });
+      })
+    }
+
+    // state == 'locked'
+    // -> trigger collateral
+    if (this.state.state === 'locked') {
+      this.setState({
+        isLoading: true
+      }, () => {
+        return fetch(ENDPOINT + '/eqcontract/triggerInsurance', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            id: this.state.id
+            yourAddress: params.insurantAddress,
+            eqcontract: this.state.contractAddress           
           })
         })
         .then((response) => response.json())
@@ -262,7 +408,7 @@ class InsurantInsurance extends React.Component {
           }, () => {
             Alert.alert(
               'Success',
-              'Insurance confirmed!',
+              'Collateral triggered!',
               [
                 {text: 'OK', onPress: () => navigate('InsurantHome')}
               ],
@@ -277,7 +423,7 @@ class InsurantInsurance extends React.Component {
           }, () => {
             Alert.alert(
               'Error',
-              'Insurance could not be confirmed! Please try again.',
+              'Collateral could not be triggered! Please try again.',
               [
                 {text: 'OK', onPress: () => console.log('OK Pressed')}
               ],
@@ -294,13 +440,15 @@ class InsurantInsurance extends React.Component {
       return 'Create'
     } else if (this.state.state === 'accepted') {
       return 'Confirm'
+    } else if (this.state.state === 'locked') {
+      return 'Claim'
     } else {
       return 'n/a'
     }
   }
 
   buttonShow() {
-    return this.state.state === 'new' || this.state.state === 'accepted'
+    return this.state.state === 'new' || this.state.state === 'accepted' || this.state.state === 'locked'
   }
 
   render() {
@@ -373,33 +521,62 @@ class InsurerHome extends React.Component {
     super(props);
     this.state = {
       isLoading: true,
-      account: 10,
-      dataSource: [
-        {key: '12AB', state: 'Requested'},
-        {key: '13AB', state: 'Accepted'},
-        {key: '14AB', state: 'Confirmed'},
-        {key: '15AB', state: 'Accepted'},
-        {key: '16AB', state: 'Confirmed'}
-      ]
+      balance: 0,
+      dataSource: []
     };
   }
 
   componentDidMount() {
-    //!!!! do be removed
-    this.setState({
-      isLoading: false,
-    })
-    return
-    //!!!! do be removed
-
-    return fetch(ENDPOINT + '/allInsurances')
+    const { params } = this.props.navigation.state
+    return fetch(ENDPOINT + '/getBalance', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          yourAddress: params.insurerAddress
+        })
+      })
       .then((response) => response.json())
       .then((responseJson) => {
         console.log(responseJson)
-        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.setState({
-          isLoading: false,
-          dataSource: ds.cloneWithRows(responseJson.insurances),
+          balance: responseJson
+        }, () => {
+          return fetch(ENDPOINT + '/allMyInsurances', {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                yourAddress: params.insurerAddress
+              })
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+              console.log(responseJson)
+              this.setState({
+                isLoading: false,
+                dataSource: responseJson
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+              this.setState({
+                isLoading: false
+              }, function() {
+                Alert.alert(
+                  'Error',
+                  'An error occured while fetching all my insurances! Please try again in a few seconds.',
+                  [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')}
+                  ],
+                  { cancelable: false }
+                )
+              });
+            });
         });
       })
       .catch((error) => {
@@ -409,7 +586,7 @@ class InsurerHome extends React.Component {
         }, function() {
           Alert.alert(
             'Error',
-            'An error occured while fetching all insurances! Please try again in a few seconds.',
+            'An error occured while fetching account balance! Please try again in a few seconds.',
             [
               {text: 'OK', onPress: () => console.log('OK Pressed')}
             ],
@@ -428,16 +605,17 @@ class InsurerHome extends React.Component {
       );
     }
 
-    const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation
+    const { params } = this.props.navigation.state
     return (
       <View style={Styles.container}>
         <Text style={Styles.baseText1}>Account:</Text>
-        <Text style={Styles.baseText3}>{this.state.account}</Text>
+        <Text style={Styles.baseText3}>{this.state.balance}</Text>
         <Text style={Styles.baseText4}>Insurances:</Text>
         <FlatList style={Styles.list}
           data={this.state.dataSource}
           renderItem={({item}) => 
-            <Button style={Styles.item} onPress={() => navigate('InsurerInsurance', item)} title={'Insurance: ' + item.key + ' State: ' + item.state}/>
+            <Button style={Styles.item} onPress={() => navigate('InsurerInsurance', { insurance: item, insurerAddress: params.insurerAddress })} title={'Insurance: ' + item.key + ' State: ' + item.state}/>
           }
         />
       </View>
@@ -467,20 +645,14 @@ class InsurerInsurance extends React.Component {
       strength: params && params.insurance ? params.insurance.strength : 0,
       value: params && params.insurance ? params.insurance.value : 0,
       duration: params && params.insurance ? params.insurance.duration : 1,
-      geolocation: 12,
+      geolocation: params && params.insurance ? params.insurance.geolocation : 'n/a',
       state: params && params.insurance ? params.insurance.state : 'new',
-      costs: 100
+      costs: params && params.insurance ? params.insurance.value : 0,
+      contractAddress: params && params.insurance ? params.insurance.address : null
     }
   }
 
   onPress() {
-    const { navigate } = this.props.navigation
-
-    //!!!! do be removed
-    navigate('InsurerHome')
-    return
-    //!!!! do be removed
-
     // check if some other action is currently processing
     if (this.state.isLoading) {
       Alert.alert(
@@ -498,20 +670,24 @@ class InsurerInsurance extends React.Component {
     // push to server
     //////
 
+    const { navigate } = this.props.navigation
+    const { params } = this.props.navigation.state;
+
     // state == 'requested'
     // -> accept insurance
     if (this.state.state === 'requested') {
       this.setState({
         isLoading: true
       }, () => {
-        return fetch(ENDPOINT + '/acceptInsurance', {
+        return fetch(ENDPOINT + '/eqcontract/acceptInsurance', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            id: this.state.id,
+            yourAddress: params.insurerAddress,
+            eqcontract: this.state.contractAddress,
             costs: this.state.costs
           })
         })
@@ -550,19 +726,72 @@ class InsurerInsurance extends React.Component {
     }
 
     // state == 'confirmed'
-    // -> close insurance
+    // -> lock insurance
     if (this.state.state === 'confirmed') {
       this.setState({
         isLoading: true
       }, () => {
-        return fetch(ENDPOINT + '/closeInsurance', {
+        return fetch(ENDPOINT + '/eqcontract/lockInsurance', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            id: this.state.id
+            yourAddress: params.insurerAddress,
+            eqcontract: this.state.contractAddress,
+            ether: this.state.costs
+          })
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log(responseJson)
+          this.setState({
+            isLoading: false
+          }, () => {
+            Alert.alert(
+              'Success',
+              'Insurance locked!',
+              [
+                {text: 'OK', onPress: () => navigate('InsurerHome')}
+              ],
+              { cancelable: false }
+            )
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+          this.setState({
+            isLoading: false
+          }, () => {
+            Alert.alert(
+              'Error',
+              'Insurance could not be locked! Please try again in a few seconds.',
+              [
+                {text: 'OK', onPress: () => console.log('OK Pressed')}
+              ],
+              { cancelable: false }
+            )
+          })
+        });
+      })
+    }
+
+    // state == 'locked'
+    // -> close insurance
+    if (this.state.state === 'locked') {
+      this.setState({
+        isLoading: true
+      }, () => {
+        return fetch(ENDPOINT + '/eqcontract/closeInsurance', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            yourAddress: params.insurerAddress,
+            eqcontract: this.state.contractAddress
           })
         })
         .then((response) => response.json())
@@ -604,6 +833,8 @@ class InsurerInsurance extends React.Component {
     if (this.state.state === 'requested') {
       return 'Accept'
     } else if (this.state.state === 'confirmed') {
+      return 'Lock'
+    } else if (this.state.state === 'locked') {
       return 'Close'
     } else {
       return 'n/a'
@@ -611,7 +842,7 @@ class InsurerInsurance extends React.Component {
   }
 
   buttonShow() {
-    return this.state.state === 'requested' || this.state.state === 'confirmed'
+    return this.state.state === 'requested' || this.state.state === 'confirmed' || this.state.state === 'locked'
   }
 
   render() {
