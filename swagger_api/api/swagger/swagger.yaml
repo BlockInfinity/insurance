@@ -163,6 +163,30 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
       x-swagger-router-controller: "info_controller"
+  /info/getBalance:
+    post:
+      tags: 
+        - info
+      description: ""
+      operationId: "getBalance"
+      parameters:
+        - name: balanceRequest
+          in: body
+          description: ""
+          required: true
+          schema: 
+            $ref: "#/definitions/balanceRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/balanceResponse"          
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "info_controller"
   /eqcontract/getCosts:
     # binds a127 app logic to a route
     x-swagger-router-controller: info_controller
@@ -498,6 +522,14 @@ definitions:
         type: number
       collateral:
         type: number
+  balanceResponse:
+    properties:
+      balance: 
+        type: number
+  balanceRequest:
+    properties:
+      yourAddress: 
+        type: string
 
 
       

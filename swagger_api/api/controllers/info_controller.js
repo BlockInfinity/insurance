@@ -103,7 +103,7 @@ module.exports = {
             res.end(error.message);
         }
     },
-      getAllInsurerEQContracts: function(req, res) {
+    getAllInsurerEQContracts: function(req, res) {
         try {
             var address = req.swagger.params.getAllCustomerEQContractsRequest.value.yourAddress;
             db.getAllInsurerEQContracts(address).then(function(result) {
@@ -117,7 +117,21 @@ module.exports = {
             res.statusCode = 500;
             res.end(error.message);
         }
-    }, 
+    },
+    getBalance: function(req, res) {
+        try {
+
+            var address = req.swagger.params.balanceRequest.value.yourAddress;
+            var balance = web3.eth.getBalance(address);
+
+            res.statusCode = 200;
+            res.end(JSON.stringify({ "balance": balance }));
+
+        } catch (error) {
+            res.statusCode = 500;
+            res.end(error.message);
+        }
+    }
 
 
 }
