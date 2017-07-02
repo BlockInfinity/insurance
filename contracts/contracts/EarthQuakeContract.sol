@@ -20,7 +20,8 @@ contract EarthQuakeContract {
     event triggerEvent(bool _success, uint _collateral);
     event acceptEvent(uint _costs);
     event isActiveEvent(uint _collateral);
-    event closeEvent();
+    event closeEvent(uint _collateral);
+    event triggeredEvent(uint _collateral);
 
     function EarthQuakeContract(address _insurer){
         insurer = _insurer;
@@ -56,6 +57,7 @@ contract EarthQuakeContract {
     
     // eigt sendet __callback geld an customer
     function trigger() {
+         triggeredEvent(collateral);
          customer.transfer(collateral);
     }
 
@@ -73,12 +75,14 @@ contract EarthQuakeContract {
     function lockCollateral() onlyInsurer() payable {
         if (msg.value < value) { throw;}
         collateral = msg.value;
-        isActiveEvent(value); 
+        isActiveEvent(msg.value); 
     }
 
     function close() onlyInsurer() {
         if ((block.number-genesisBlock) < duration) {throw;}
+        closeEvent(collateral);
+        insurer.transfer(collateral);
     }
 
- 
+    
 }

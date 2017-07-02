@@ -286,7 +286,9 @@ definitions:
         type: number
   triggerRequest:
     properties:
-      address:
+      yourAddress:
+        type: string
+      eqcontract:
         type: string
   triggerRespone:
     properties:
@@ -294,12 +296,18 @@ definitions:
         type: number
   acceptRequest:
     properties:
+      yourAddress:
+        type: string
       eqcontract:
         type: string
       costs:
         type: number
   lockCollateralRequest:
     properties:
+      yourAddress:
+        type: string
+      eqcontract:
+        type: string
       ether:
         type: number
   closeResponse:
@@ -308,7 +316,9 @@ definitions:
         type: number
   closeRequest:
     properties:
-      address:
+      yourAddress:
+        type: string
+      eqcontract:
         type: string
   getEQContractRequest:
     properties:
