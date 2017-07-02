@@ -48,7 +48,7 @@ paths:
   /contractfactory/getEarthQuakeContract:
     # binds a127 app logic to a route
     x-swagger-router-controller: info_controller
-    get:
+    post:
       tags:
         - customer
       description: " "
