@@ -49,6 +49,8 @@ try {
     var eqcontract = eqcontract_contract.at(addresses.EarthQuakeContract)
     web3.eqcontract =  eqcontract;
 
+    console.log(web3.eqcontract.costs(),1231);
+    console.log(web3.eqcontract.collateral(),1231);
     // web3.eqcontract.request(1,"1232",1,1,{from: eth.accounts[1], gas: 8000000});
 
 

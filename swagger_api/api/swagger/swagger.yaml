@@ -49,7 +49,7 @@ paths:
     x-swagger-router-controller: info_controller
     post:
       tags:
-        - customer
+        - info
       description: " "
       # used as the method name of the controller
       operationId: getEQContract
@@ -66,6 +66,60 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/getEQContractResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /eqcontract/getCollateral:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: info_controller
+    post:
+      tags:
+        - info
+      description: " "
+      # used as the method name of the controller
+      operationId: getCollateral
+      parameters:
+        - name: getCollateralRequest
+          in: body
+          description: ""
+          required: true
+          schema: 
+            $ref: "#/definitions/getCollateralRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/getCollateralResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /eqcontract/getCosts:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: info_controller
+    post:
+      tags:
+        - info
+      description: " "
+      # used as the method name of the controller
+      operationId: getCosts
+      parameters:
+        - name: getCostsRequest
+          in: body
+          description: ""
+          required: true
+          schema: 
+            $ref: "#/definitions/getCostsRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/getCostsResponse"
         # responses may fall through to errors
         default:
           description: Error
@@ -233,6 +287,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+
             
 
 
@@ -323,6 +378,22 @@ definitions:
   getEQContractRequest:
     properties:
       id:
+        type: number
+  getCollateralRequest:
+    properties:
+      eqcontract:
+        type: string
+  getCollateralResponse:
+    properties:
+      collateral:
+        type: number
+  getCostsRequest:
+    properties:
+      eqcontract:
+        type: string  
+  getCostsResponse:
+    properties:
+      costs:
         type: number
       
         
