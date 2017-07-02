@@ -2,8 +2,7 @@ swagger: "2.0"
 info:
   version: "0.0.1"
   title: Blockchain Insurance Api
-# during dev, should point to your local machine
-host: localhost:8081
+
 # basePath prefixes all resource paths 
 basePath: /
 # 
@@ -48,7 +47,7 @@ paths:
   /contractfactory/getEarthQuakeContract:
     # binds a127 app logic to a route
     x-swagger-router-controller: info_controller
-    get:
+    post:
       tags:
         - customer
       description: " "
@@ -265,6 +264,8 @@ definitions:
         type: string
   requestInsuranceRequest:
     properties:
+      yourAddress:
+        type: string
       eqcontract:
         type: string
       strength:
@@ -277,13 +278,17 @@ definitions:
         type: number
   confirmRequest:
    properties:
-      address:
+      yourAddress:
+        type: string
+      eqcontract:
         type: string
       ether:
         type: number
   triggerRequest:
     properties:
-      address:
+      yourAddress:
+        type: string
+      eqcontract:
         type: string
   triggerRespone:
     properties:
@@ -291,12 +296,18 @@ definitions:
         type: number
   acceptRequest:
     properties:
+      yourAddress:
+        type: string
       eqcontract:
         type: string
       costs:
         type: number
   lockCollateralRequest:
     properties:
+      yourAddress:
+        type: string
+      eqcontract:
+        type: string
       ether:
         type: number
   closeResponse:
@@ -305,7 +316,9 @@ definitions:
         type: number
   closeRequest:
     properties:
-      address:
+      yourAddress:
+        type: string
+      eqcontract:
         type: string
   getEQContractRequest:
     properties:

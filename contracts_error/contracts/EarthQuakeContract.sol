@@ -16,12 +16,11 @@ contract EarthQuakeContract {
     bool public initial = true;
     
     event insuranceRequest(uint _strength,string _geolocation,uint  _value,uint _duration);
-    event confirmEvent(uint _paid, address _from);
+    event confirmEvent(uint _costs);
     event triggerEvent(bool _success, uint _collateral);
     event acceptEvent(uint _costs);
     event isActiveEvent(uint _collateral);
-    event closeEvent(uint _collateral);
-    event triggeredEvent(uint _collateral);
+    event closeEvent();
 
     function EarthQuakeContract(address _insurer){
         insurer = _insurer;
@@ -39,7 +38,7 @@ contract EarthQuakeContract {
     }
     
     // customer
-    function request(uint _strength, string _geolocation, uint  _value, uint _duration) /*onlyInitial()*/ {
+    function request(uint _strength, string _geolocation, uint  _value, uint _duration) onlyInitial() {
         initial = false;
         customer = msg.sender;
         strength = _strength;
@@ -52,12 +51,11 @@ contract EarthQuakeContract {
     function confirm() payable {
         if (msg.value < costs) {throw;}
         insurer.transfer(msg.value);
-        confirmEvent(msg.value, msg.sender);
+        confirmEvent(costs);
     }
     
     // eigt sendet __callback geld an customer
     function trigger() {
-         triggeredEvent(collateral);
          customer.transfer(collateral);
     }
 
@@ -75,14 +73,12 @@ contract EarthQuakeContract {
     function lockCollateral() onlyInsurer() payable {
         if (msg.value < value) { throw;}
         collateral = msg.value;
-        isActiveEvent(msg.value); 
+        isActiveEvent(value); 
     }
 
     function close() onlyInsurer() {
         if ((block.number-genesisBlock) < duration) {throw;}
-        closeEvent(collateral);
-        insurer.transfer(collateral);
     }
 
-    
+ 
 }
