@@ -23,7 +23,7 @@ module.exports = {
             console.log(eqcontract, 123123)
             var contract = web3.eqcontract_contract.at(eqcontract);
 
-            var addr = contract.request(strength, geolocation, value, duration, { from: yourAddress });
+            var addr = contract.request(strength, geolocation, value, duration, { from: yourAddress, gas:8000000 });
 
             contract.insuranceRequest(function(error, result) {
                 var _strength = result.args._strength;
@@ -168,7 +168,7 @@ module.exports = {
 
         } catch (error) {
             res.statusCode = 500;
-            res.end(error.message);
+            res.end("no callateral left");
         }
     }, 
         trigger: function(req, res) {
@@ -199,7 +199,7 @@ module.exports = {
 
         } catch (error) {
             res.statusCode = 500;
-            res.end(error.message);
+            res.end("no callateral left");
         }
     }
 
