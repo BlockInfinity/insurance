@@ -35,7 +35,7 @@ module.exports = {
     },
     getAllInsurerEQContracts: function(_address) {
         return new Promise(function(resolve, reject) {
-            eqcontracts.find().make(function(builder) {
+            eqcontracts.one().make(function(builder) {
                 builder.where('customer', _address);
                 builder.callback(function(err, response) {
                     if (!err) {
@@ -49,7 +49,7 @@ module.exports = {
     },
     getAllInsurerEQContracts: function(_address) {
     	return new Promise(function(resolve, reject) {
-            eqcontracts.find().make(function(builder) {
+            eqcontracts.one().make(function(builder) {
                 builder.where('insurer', _address);
                 builder.callback(function(err, response) {
                     if (!err) {
