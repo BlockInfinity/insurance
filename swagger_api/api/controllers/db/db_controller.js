@@ -36,7 +36,7 @@ module.exports = {
     getAllInsurerEQContracts: function(_address) {
         return new Promise(function(resolve, reject) {
             eqcontracts.one().make(function(builder) {
-                builder.where('customer', _address);
+                builder.where('insurer', _address);
                 builder.callback(function(err, response) {
                     if (!err) {
                         resolve(response);

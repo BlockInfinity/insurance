@@ -70,7 +70,7 @@ module.exports = {
             }
 
             if (yourAddress == "string") {
-                yourAddress = web3.eth.accounts[2];
+                yourAddress = web3.eth.accounts[1];
             }
 
             var contract = web3.eqcontract_contract.at(eqcontract);
@@ -262,7 +262,7 @@ module.exports = {
             }
 
             if (yourAddress == "string") {
-                yourAddress = web3.eth.accounts[2];
+                yourAddress = web3.eth.accounts[1];
             }
 
             var contract = web3.eqcontract_contract.at(eqcontract);
@@ -279,8 +279,6 @@ module.exports = {
                     builder.where('eqcontract', eqcontract);
                     builder.callback(function(err, count) {
                         console.log('modified documents:', count);
-
-
 
 
                         db.getEQContractInfo(eqcontract).then(function(result) {
