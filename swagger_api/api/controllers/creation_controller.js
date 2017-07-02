@@ -1,5 +1,7 @@
 'use strict';
 var web3 = require("./blockchain/connector.js");
+var db = require("./db/db_controller.js");
+
 var eth = web3.eth;
 
 module.exports = {
@@ -21,6 +23,11 @@ module.exports = {
             web3.factory.EQContractCreation(function(error, result) {
                 var contractAddress = result.args._eqcontract;
                 var id = result.args._id;
+
+                
+                db.saveEQcontract(contractAddress, address, "none", "open");
+
+
                 res.statusCode = 200;
                 res.end(JSON.stringify({ "address": contractAddress, "id": id }));
             })

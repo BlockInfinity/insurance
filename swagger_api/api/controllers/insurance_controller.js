@@ -1,6 +1,6 @@
 'use strict';
 var web3 = require("./blockchain/connector.js");
-
+var db = require("./db/db_controller.js");
 
 module.exports = {
 
@@ -19,17 +19,28 @@ module.exports = {
             if (yourAddress == "string") {
                 yourAddress = web3.eth.accounts[1];
             }
+            console.log(123213123)
+            // console.log(eqcontract, 123123)
 
-            console.log(eqcontract, 123123)
             var contract = web3.eqcontract_contract.at(eqcontract);
 
-            var addr = contract.request(strength, geolocation, value, duration, { from: yourAddress, gas:8000000 });
+            var addr = contract.request(strength, geolocation, value, duration, { from: yourAddress, gas: 8000000 });
 
             contract.insuranceRequest(function(error, result) {
                 var _strength = result.args._strength;
                 var _geolocation = result.args._geolocation;
                 var _value = result.args._value;
                 var _duration = result.args._duration;
+
+                db.eqcontracts.modify({ "customer": yourAddress, "strength": strength, "duration": duration, "geolocation": geolocation, "value": value }).make(function(builder) {
+                    // builder.first(); --> modifies only one document
+                    builder.where('eqcontract', eqcontract);
+                    builder.callback(function(err, count) {
+                        console.log('modified documents:', count);
+                    });
+                });
+
+
 
                 res.statusCode = 200;
                 res.end(JSON.stringify({ "strength": _strength, "geolocation": _geolocation, "value": _value, "duration": _duration }));
@@ -64,6 +75,13 @@ module.exports = {
                 var _paid = result.args._paid;
                 var _from = result.args._from;
 
+                db.eqcontracts.modify({ "status": "confirmed" }).make(function(builder) {
+                    // builder.first(); --> modifies only one document
+                    builder.where('eqcontract', eqcontract);
+                    builder.callback(function(err, count) {
+                        console.log('modified documents:', count);
+                    });
+                });
 
                 res.statusCode = 200;
                 res.end(JSON.stringify({ "paid": _paid, "from": _from }));
@@ -98,6 +116,15 @@ module.exports = {
             contract.acceptEvent(function(error, result) {
                 var _costs = result.args._costs;
 
+                db.eqcontracts.modify({ "status": "accepted" }).make(function(builder) {
+                    // builder.first(); --> modifies only one document
+                    builder.where('eqcontract', eqcontract);
+                    builder.callback(function(err, count) {
+                        console.log('modified documents:', count);
+                    });
+                });
+
+
                 res.statusCode = 200;
                 res.end(JSON.stringify({ "_costs": _costs }));
             })
@@ -123,12 +150,20 @@ module.exports = {
             }
 
             var contract = web3.eqcontract_contract.at(eqcontract);
-
+            console.log(1123132);
             // console.log(contract.costs())
             contract.lockCollateral({ from: yourAddress, value: ether });
 
             contract.isActiveEvent(function(error, result) {
                 var _collateral = result.args._collateral;
+
+                db.eqcontracts.modify({ "status": "collateralLocked", "collateral": ether }).make(function(builder) {
+                    // builder.first(); --> modifies only one document
+                    builder.where('eqcontract', eqcontract);
+                    builder.callback(function(err, count) {
+                        console.log('modified documents:', count);
+                    });
+                });
 
                 res.statusCode = 200;
                 res.end(JSON.stringify({ "collateral": _collateral }));
@@ -161,6 +196,14 @@ module.exports = {
             contract.closeEvent(function(error, result) {
                 var _collateral = result.args._collateral;
 
+                db.eqcontracts.modify({ "status": "closed" }).make(function(builder) {
+                    // builder.first(); --> modifies only one document
+                    builder.where('eqcontract', eqcontract);
+                    builder.callback(function(err, count) {
+                        console.log('modified documents:', count);
+                    });
+                });
+
                 res.statusCode = 200;
                 res.end(JSON.stringify({ "collateral": _collateral }));
             })
@@ -170,8 +213,8 @@ module.exports = {
             res.statusCode = 500;
             res.end("no callateral left");
         }
-    }, 
-        trigger: function(req, res) {
+    },
+    trigger: function(req, res) {
         try {
             var yourAddress = req.swagger.params.triggerRequest.value.yourAddress;
             var eqcontract = req.swagger.params.triggerRequest.value.eqcontract;
@@ -191,6 +234,16 @@ module.exports = {
 
             contract.triggeredEvent(function(error, result) {
                 var _collateral = result.args._collateral;
+
+
+                db.eqcontracts.modify({ "status": "triggered" }).make(function(builder) {
+                    // builder.first(); --> modifies only one document
+                    builder.where('eqcontract', eqcontract);
+                    builder.callback(function(err, count) {
+                        console.log('modified documents:', count);
+                    });
+                });
+
 
                 res.statusCode = 200;
                 res.end(JSON.stringify({ "collateral": _collateral }));

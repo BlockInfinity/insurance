@@ -1,6 +1,6 @@
 'use strict';
 var web3 = require("./blockchain/connector.js");
-
+var db = require("./db/db_controller.js");
 
 module.exports = {
 
@@ -87,6 +87,37 @@ module.exports = {
         }
         res.end();
     },
+
+    getAllCustomerEQContracts: function(req, res) {
+        try {
+            var address = req.swagger.params.getAllCustomerEQContractsRequest.value.yourAddress;
+            db.getAllCustomerEQContracts(address).then(function(result) {
+                res.statusCode = 200;
+                res.end(JSON.stringify(result));
+            }, function(reason) {
+                res.statusCode = 500;
+                res.end('db error', reason);
+            })
+        } catch (error) {
+            res.statusCode = 500;
+            res.end(error.message);
+        }
+    },
+      getAllInsurerEQContracts: function(req, res) {
+        try {
+            var address = req.swagger.params.getAllCustomerEQContractsRequest.value.yourAddress;
+            db.getAllInsurerEQContracts(address).then(function(result) {
+                res.statusCode = 200;
+                res.end(JSON.stringify(result));
+            }, function(reason) {
+                res.statusCode = 500;
+                res.end('db error', reason);
+            })
+        } catch (error) {
+            res.statusCode = 500;
+            res.end(error.message);
+        }
+    }, 
 
 
 }

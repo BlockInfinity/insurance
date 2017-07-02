@@ -115,6 +115,54 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
       x-swagger-router-controller: "info_controller"
+  /info/getAllCustomerEQContracts:
+    post:
+      tags: 
+        - info
+      description: ""
+      operationId: "getAllCustomerEQContracts"
+      parameters:
+        - name: getAllCustomerEQContractsRequest
+          in: body
+          description: ""
+          required: true
+          schema: 
+            $ref: "#/definitions/getAllCustomerEQContractsRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/getAllMyEQContractsResponse"          
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "info_controller"
+  /info/getAllInsurerEQContracts:
+    post:
+      tags: 
+        - info
+      description: ""
+      operationId: "getAllInsurerEQContracts"
+      parameters:
+        - name: getAllCustomerEQContractsRequest
+          in: body
+          description: ""
+          required: true
+          schema: 
+            $ref: "#/definitions/getAllCustomerEQContractsRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/getAllMyEQContractsResponse"          
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "info_controller"
   /eqcontract/getCosts:
     # binds a127 app logic to a route
     x-swagger-router-controller: info_controller
@@ -330,6 +378,8 @@ definitions:
     properties:
       address:
         type: string
+      id:
+        type: number
   getEQContractResponse:
     properties:
       address:
@@ -418,6 +468,38 @@ definitions:
         type: array
         items:
           type: string
+  getAllCustomerEQContractsRequest:
+    properties:
+      yourAddress:
+        type: string
+  getAllMyEQContractsResponse:
+    properties:
+      eqcontracts:
+        type: array
+        items:
+          $ref: "#/definitions/eqcontractEntry"
+  eqcontractEntry:
+    properties:
+      eqcontract:
+        type: string
+      insurer:
+        type: string
+      customer:
+        type: string
+      status:
+        type: string
+      strength:
+        type: number
+      duration:
+        type: number
+      geolocation:
+        type: string
+      value:
+        type: number
+      collateral:
+        type: number
+
+
       
         
   

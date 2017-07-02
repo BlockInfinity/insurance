@@ -8,6 +8,8 @@ var jsyaml = require('js-yaml');
 var fs = require('fs');
 var serverPort = 8081;
 var express = require("express")
+var db = require("./api/controllers/db/db_controller.js");
+// db.deleteDataBase();
 
 module.exports = app; // for testing
 
