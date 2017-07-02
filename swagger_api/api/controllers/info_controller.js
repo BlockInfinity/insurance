@@ -91,6 +91,11 @@ module.exports = {
     getAllCustomerEQContracts: function(req, res) {
         try {
             var address = req.swagger.params.getAllCustomerEQContractsRequest.value.yourAddress;
+
+            if (address == "string") {
+                address = web3.eth.accounts[0];
+            }
+
             db.getAllCustomerEQContracts(address).then(function(result) {
                 res.statusCode = 200;
                 res.end(JSON.stringify(result));
@@ -106,6 +111,13 @@ module.exports = {
     getAllInsurerEQContracts: function(req, res) {
         try {
             var address = req.swagger.params.getAllCustomerEQContractsRequest.value.yourAddress;
+
+
+            if (address == "string") {
+                address = web3.eth.accounts[0];
+            }
+
+
             db.getAllInsurerEQContracts(address).then(function(result) {
                 res.statusCode = 200;
                 res.end(JSON.stringify(result));
