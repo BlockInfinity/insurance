@@ -43,7 +43,7 @@ module.exports = {
             res.statusCode = 500;
             res.end(error.message);
         }
-    } ,
+    },
 
 
     getCosts: function(req, res) {
@@ -73,6 +73,20 @@ module.exports = {
             res.statusCode = 500;
             res.end(error.message);
         }
-    }
+    },
+
+
+    getAllAccounts: function(req, res) {
+        try {
+            var accounts = web3.eth.accounts;
+            res.statusCode = 200;
+            res.end(JSON.stringify(accounts));
+        } catch (error) {
+            res.statusCode = 500;
+            res.end(error.message);
+        }
+        res.end();
+    },
+
 
 }
