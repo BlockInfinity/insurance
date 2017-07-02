@@ -14,7 +14,7 @@ contract("factory", function(accounts) {
     before(function() {
         return co(function*() {
             owner = accounts[0];
-            // factory = yield InsuranceContractFactory.deployed();
+            factory = yield InsuranceContractFactory.deployed();
 
         });
     });
