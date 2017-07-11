@@ -1,6 +1,8 @@
 pragma solidity ^0.4.4;
 
-contract EarthQuakeContract {
+import "./usingOraclize.sol";
+
+contract EarthQuakeContract is usingOraclize {
     // customer
     uint public strength;
     string public geolocation;
@@ -24,6 +26,7 @@ contract EarthQuakeContract {
     event triggeredEvent(uint _collateral);
 
     function EarthQuakeContract(address _insurer){
+        OAR = OraclizeAddrResolverI(0x6f485C8BF6fc43eA212E93BBF8ce046C7f1cb475);
         insurer = _insurer;
         genesisBlock = block.number;
     }
@@ -84,5 +87,16 @@ contract EarthQuakeContract {
         insurer.transfer(collateral);
     }
 
-    
+    // test section 
+
+    event oraclizeIzDa(string result);
+
+    function sendTestQuery(){
+        oraclize_query("URL", "https://api.kraken.com/0/public/Ticker?pair=ETHXBT"); 
+    }
+
+    function __callback(bytes32 myid, string result, bytes proof) {
+        oraclizeIzDa(result);
+    }
+  
 }

@@ -27,3 +27,22 @@ ERROR in ./app/main.js
 Module not found: Error: Can't resolve '../build/contracts/MetaCoin.json' in '/Users/tim/Documents/workspace/Consensys/test3/app'
  @ ./app/main.js 11:16-59
 ```
+## truffle with oraclize (by magnus)
+
+1. start testrpc with 
+
+'''
+testrpc --mnemonic "stayconstant" --accounts 100 --gasLimit 0x7A1200 console
+'''
+
+2. start ethereum bridge with 
+
+'''
+node bridge -H localhost:8545 -a 99
+'''
+
+## Sources:
+
+https://ethereum.stackexchange.com/questions/11383/oracle-oraclize-it-with-truffle-and-testrpc
+
+https://github.com/oraclize/ethereum-bridge

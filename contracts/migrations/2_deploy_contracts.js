@@ -6,11 +6,12 @@ var MetaCoin = artifacts.require("./MetaCoin.sol");
 
 var InsuranceContractFactory = artifacts.require("./InsuranceContractFactory.sol");
 var EarthQuakeContract = artifacts.require("./EarthQuakeContract.sol");
+var usingOraclize = artifacts.require("./usingOraclize.sol");
 
 module.exports = function(deployer) {
 
 
-
+    deployer.deploy(usingOraclize);
     deployer.deploy(ConvertLib);
     deployer.link(ConvertLib, MetaCoin);
     deployer.deploy(MetaCoin);
