@@ -26,7 +26,7 @@ module.exports = {
 
             var addr = contract.request(strength, geolocation, value, duration, { from: yourAddress, gas: 8000000 });
 
-            contract.insuranceRequest(function(error, result) {
+            contract.InsuranceRequest(function(error, result) {
                 var _strength = result.args._strength;
                 var _geolocation = result.args._geolocation;
                 var _value = result.args._value;

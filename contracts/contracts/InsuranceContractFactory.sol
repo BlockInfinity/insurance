@@ -6,18 +6,16 @@ contract InsuranceContractFactory {
 
     address[] public contracts;
 
-    event EQContractCreation(address _eqcontract, uint _id);
+    event EQContractCreation(address _eqcontract);
 
-    function createEarthQuakeContract() returns(uint) {
+    function createEarthQuakeContract() returns(address) {
         address eqcontract = new EarthQuakeContract(msg.sender);
         contracts.push(eqcontract);
         uint id = contracts.length - 1;
-        EQContractCreation(eqcontract, id);
-        return id;
+        EQContractCreation(eqcontract);
+        return eqcontract;
     }
     
-    function getEarthQuakeContract(uint _id) constant returns(address) {
-        return contracts[_id];
-    }
+
 
 }

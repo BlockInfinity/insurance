@@ -15,7 +15,7 @@ contract EarthQuakeContract {
     uint public collateral;
     bool public initial = true;
     
-    event insuranceRequest(uint _strength,string _geolocation,uint  _value,uint _duration);
+    event InsuranceRequest(uint _strength,string _geolocation,uint  _value,uint _duration);
     event confirmEvent(uint _costs);
     event triggerEvent(bool _success, uint _collateral);
     event acceptEvent(uint _costs);
@@ -45,7 +45,7 @@ contract EarthQuakeContract {
         geolocation = _geolocation;
         value = _value;
         duration = _duration;
-        insuranceRequest( _strength, _geolocation,_value, _duration);    
+        InsuranceRequest( _strength, _geolocation,_value, _duration);    
     }
 
     function confirm() payable {
