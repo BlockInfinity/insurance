@@ -29,7 +29,7 @@ contract EarthQuakeContract is usingOraclize {
     bool isConfirmed;
 
     function EarthQuakeContract(address _insurer){
-        OAR = OraclizeAddrResolverI(0x6f485C8BF6fc43eA212E93BBF8ce046C7f1cb475);
+        Ora = Oracle(0x6f485C8BF6fc43eA212E93BBF8ce046C7f1cb475);
         insurer = _insurer;
         genesisBlock = block.number;
     }
