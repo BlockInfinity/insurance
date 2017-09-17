@@ -11,26 +11,30 @@ var _durationInBlocks = 100
 var _accountNoCustomer = 1
 var _accountNoInsurer = 0
 var _price = 500;
-var _accessToken = "672b00e21abc9371dd860e34569f3a32"
+var _accessToken = "a38be8fba36fe256ba3e405a812f1098"
 var _contract;
+
+// todo: in memory die contracts abspeichern samt status 
+// todo: in memory die requests abspeichern 
+
 
 describe('app.js', function() {
 
-    // it('createFlightDelayContract', function(done) {
-    //     app.createFlightDelayContract(0).then(res => {
-    //         console.log(res.args._contract + "created");
-    //         _contract = res.args._contract;
-    //         done();
-    //     })
-    // });
+    it('createFlightDelayContract', function(done) {
+        this.timeout(30000); // falls events nicht geworfen werden beendet timer den test
+        app.createFlightDelayContract(_accountNoInsurer).then(res => {
+            // console.log(res.args._contract + " created");
+            _contract = res.args._contract;
+            done();
+        })
+    });
 
-
-    // it('setDefaultFlightDelayContract', function(done) {
-    //     var _contract = app.setDefaultFlightDelayContract(_contract);
-    //     console.log(_contract.address + "is set as default")
-    //     done()
-    // });
-
+    // todo: bug
+    it.skip('setDefaultFlightDelayContract', function(done) {
+        _contract = app.setDefaultFlightDelayContract(_contract);
+        console.log(_contract + "is set as default")
+        done()
+    });
 
     it('setOracle', function(done) {
         app.setOracle(web3.Oracle.address, _accountNoInsurer).then(res => {
@@ -56,6 +60,7 @@ describe('app.js', function() {
             done();
         })
     });
+
     it('trigger', function(done) {
         this.timeout(30000); // falls events nicht geworfen werden beendet timer den test
         app.trigger(_accessToken).then(res => {
@@ -64,5 +69,8 @@ describe('app.js', function() {
             done();
         })
     });
+
+
+
 
 });

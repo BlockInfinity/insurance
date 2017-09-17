@@ -57,6 +57,14 @@ try {
     }
     console.log("\n")
 
+
+    abiPath = path.join(__dirname, '..', '/truffle/build/contracts/', "FlightDelayContract.json");
+    abi_contract = fs.readFileSync(abiPath).toString();
+    abi_contract = JSON.parse(abi_contract).abi;
+    contract = web3.eth.contract(abi_contract);
+    web3["FlightDelayContract"] = contract.at(addresses["FlightDelayContract"]);
+
+
 } catch (err) {
     console.log(err);
     throw new Error(err);
