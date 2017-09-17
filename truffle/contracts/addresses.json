@@ -1,1 +1,1 @@
-{"EarthQuakeContract":"0x300b2c434db1241e982252f53959ecf58ad33e05","InsuranceContractFactory":"0x45e81a9f398e202db65d06db0129bc86dbc9bf1f"}
+{"FlightDelayContract":"0x47820cbe8c3d87a6c957c481ad4147ab250dff85","InsuranceContractFactory":"0xa9366827456ed9eb42fb4dc91ad75591da0fda98","usingMGSOracle":"0x47820cbe8c3d87a6c957c481ad4147ab250dff85","Oracle":"0x996811b71f562826006a56e79b18c18e7c24e744"}

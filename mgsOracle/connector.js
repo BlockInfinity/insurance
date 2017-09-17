@@ -15,14 +15,15 @@ try {
         web3 = new Web3(web3.currentProvider);
     } else {
         // set the provider you want from Web3.providers
-        web3 = new Web3(new Web3.providers.HttpProvider("http://testrpcName:8545"));
+        // web3 = new Web3(new Web3.providers.HttpProvider("http://testrpcName:8545"));
+        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
     }
 
     if (!web3.isConnected()) {
         throw new Error("web3 is not connected.")
     }
 
-    web3.eth.defaulAccount = web3.eth.accounts[0];
+    web3.eth.defaultAccount = web3.eth.accounts[0]
 
     // ##########################################################################################################
     // ################################ Load deployed Contracts from truffle reposiroty #########################
@@ -37,7 +38,7 @@ try {
     var contract;
     var instance;
 
-    var pathContracts = path.join(__dirname, '..', '..', '..', '..', '/truffle/build/contracts');
+    var pathContracts = path.join(__dirname, '..', '/truffle/build/contracts');
     var files = fs.readdirSync(pathContracts);
 
     console.log("\n")
@@ -46,7 +47,7 @@ try {
         //     continue;
         // }
         var contractName = files[x].replace('.json', '');
-        abiPath = path.join(__dirname, '..', '..', '..', '..', '/truffle/build/contracts/', contractName + '.json');
+        abiPath = path.join(__dirname, '..', '/truffle/build/contracts/', contractName + '.json');
         abi_contract = fs.readFileSync(abiPath).toString();
         abi_contract = JSON.parse(abi_contract).abi;
         contract = web3.eth.contract(abi_contract);
