@@ -1,0 +1,28 @@
+{
+  "name": "energyShare",
+  "version": "0.0.1",
+  "private": true,
+  "description": "New Swagger API Project",
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "main": "app.js",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "chai": "^4.0.2",
+    "connect": "^3.3.5",
+    "express": "^4.15.3",
+    "nosql": "^5.0.3",
+    "solc": "^0.4.11",
+    "swagger-connect": "^0.1.0",
+    "web3": "^0.19.1"
+  },
+  "devDependencies": {
+    "should": "^7.1.0",
+    "supertest": "^1.0.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "swagger project test"
+  }
+}

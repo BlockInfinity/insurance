@@ -74,17 +74,17 @@ gulp.task('init', function(cb) {
 });
 
 
-gulp.task('start', function(cb) {
-    gulp.start("kill");
-    sleep.sleep(5);
-    gulp.start("testrpc");
-    sleep.sleep(5);
-    gulp.start("truffle");
-    sleep.sleep(5);
-    gulp.start("oracle");
-    sleep.sleep(5);
-    gulp.start("start");
-});
+// gulp.task('start', function(cb) {
+//     gulp.start("kill");
+//     sleep.sleep(5);
+//     gulp.start("testrpc");
+//     sleep.sleep(5);
+//     gulp.start("truffle");
+//     sleep.sleep(5);
+//     gulp.start("oracle");
+//     sleep.sleep(5);
+//     gulp.start("start");
+// });
 
 
 gulp.task('test', function(cb) {

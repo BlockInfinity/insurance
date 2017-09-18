@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+# allianz
+
+test
+=======
 
 # Insurance App in 
 
@@ -57,3 +62,4 @@ cd /src/swagger ; truffle deploy --network container
 * Beim Start werden automatisch alle truffle und api tests ausgeführt. 
 
 * Die Browser IDE Cloud9 ist unter http://localhost:8181/ide.html erreichbar. 
+>>>>>>> f36dfd9ad6848934e266e693ff02e45265204e6a
