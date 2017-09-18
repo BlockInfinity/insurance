@@ -1,4 +1,4 @@
-const app = require("../app.js");
+const app = require("../api.js");
 const web3 = require("../blockchain/connector.js");
 const eth = web3.eth;
 const path = require("path");
