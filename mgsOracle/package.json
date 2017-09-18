@@ -13,6 +13,7 @@
     "child_process": "^1.0.2",
     "fs": "0.0.1-security",
     "gulp": "^3.9.1",
+    "lokijs": "^1.5.0",
     "path": "^0.12.7",
     "request": "^2.81.0",
     "sleep": "^5.1.1",
