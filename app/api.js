@@ -70,7 +70,7 @@ module.exports = {
 
     },
 
-    request: function(_airlinecode, _flightnumber, _originflightdate, _insuranceValue, _durationInBlocks, _sender) {
+    request: function(_addr, _airlinecode, _flightnumber, _originflightdate, _insuranceValue, _durationInBlocks, _sender) {
 
         instanceFlightDelayContract.request(_airlinecode, _flightnumber, _originflightdate, _insuranceValue, _durationInBlocks, { from: _sender, gas: 4000000 });
 
@@ -97,7 +97,7 @@ module.exports = {
 
     },
 
-    accept: function(_price, _sender, _value) {
+    accept: function(_addr, _price, _sender, _value) {
 
         instanceFlightDelayContract.accept(_price, { from: _sender, value: _value });
 
@@ -119,7 +119,7 @@ module.exports = {
 
     },
 
-    confirm: function(_sender, _value) {
+    confirm: function(_addr, _sender, _value) {
 
         instanceFlightDelayContract.confirm({ from: _sender, value: _value });
 
@@ -138,7 +138,7 @@ module.exports = {
         })
 
     },
-    trigger: function(_accessToken) {
+    trigger: function(_addr, _accessToken) {
 
         instanceFlightDelayContract.trigger(_accessToken);
 
@@ -151,7 +151,7 @@ module.exports = {
         });
 
     },
-    close: function() {
+    close: function(_addr) {
 
         instanceFlightDelayContract.close();
 
