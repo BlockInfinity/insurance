@@ -57,19 +57,19 @@ app.post('/api/request', function(req, res) {
 	    _from = res.args._from;
 	    console.log(`FlightDelayContract with address ${_addr} was created by ${_from} \n`)
 
-	    let _contractInfo = api.getContract(_addr)
+	    let _contractInfo = api.getContract()
 	    console.log(`The current FlightDelayContract info: \n ${JSON.stringify(_contractInfo)}`)
 
-	    requests.push({id: _addr, airlinecode: airlinecode, flightnumber: flightnumber, 
-    		originflightdate: originflightdate , insuranceValue: insuranceValue, price: null, state: 'requested'})
+	    // requests.push({id: _addr, airlinecode: airlinecode, flightnumber: flightnumber, 
+    		// originflightdate: originflightdate , insuranceValue: insuranceValue, price: null, state: 'requested'})
 
-	    api.request(_addr, airlinecode, flightnumber, originflightdate, insuranceValue, 9999, _insurant).then(res => {
-	    	res.status(200);
-	    	res.send('request created');
-		}).catch(function (err) {
-			res.status(500);
-			res.send('request create error');
-	  	})
+	 //    api.request( airlinecode, flightnumber, originflightdate, insuranceValue, 9999, _insurant).then(res => {
+	 //    	res.status(200);
+	 //    	res.send('request created');
+		// }).catch(function (err) {
+		// 	res.status(500);
+		// 	res.send('request create error');
+	 //  	})
 	}).catch(function (err) {
 		res.status(500);
 		res.send('request unable to create contract');
@@ -86,7 +86,7 @@ app.post('/api/accept', function(req, res) {
 		res.send('request not found');
     }
 
-    api.accept(id, price, _insurer, result.insuranceValue).then(res => {
+    api.accept( price, _insurer, result.insuranceValue).then(res => {
     	res.status(200);
     	res.send('request accepted');
 	}).catch(function (err) {
@@ -104,7 +104,7 @@ app.post('/api/confirm', function(req, res) {
 		res.send('request not found');
     }
 
-    api.confirm(id, _insurant, result.price).then(res => {
+    api.confirm( _insurant, result.price).then(res => {
     	res.status(200);
     	res.send('request confirmed');
 	}).catch(function (err) {
@@ -122,7 +122,7 @@ app.post('/api/trigger', function(req, res) {
 		res.send('request not found');
     }
 
-    api.trigger(id, accesToken?).then(res => {
+    api.trigger().then(res => {
     	res.status(200);
     	res.send('request triggered');
 	}).catch(function (err) {
@@ -140,7 +140,7 @@ app.post('/api/close', function(req, res) {
 		res.send('request not found');
     }
 
-    api.close(id).then(res => {
+    api.close().then(res => {
     	res.status(200);
     	res.send('request closed');
 	}).catch(function (err) {
