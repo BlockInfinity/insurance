@@ -16835,8 +16835,1288 @@
       "links": {},
       "address": "0x47820cbe8c3d87a6c957c481ad4147ab250dff85",
       "updated_at": 1505724737795
+    },
+    "1505724833845": {
+      "events": {
+        "0x37f17630421389651c2f915cbbabec25709cca7f6f5254e99db486affb09ecc7": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_durationInBlocks",
+              "type": "uint256"
+            }
+          ],
+          "name": "InsuranceRequest",
+          "type": "event"
+        },
+        "0x960f83bc4c13bb9e62175b41a1f6e035ac4f89ef35ac769dc4d1a4b18714a8e5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_paid",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_from",
+              "type": "address"
+            }
+          ],
+          "name": "confirmEvent",
+          "type": "event"
+        },
+        "0x7e5bfac627f690db5cb66b596e081d172923751dcc9cd0fe2e821c9813d636ab": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_success",
+              "type": "bool"
+            },
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "triggerEvent",
+          "type": "event"
+        },
+        "0x8803fc454569835e33f189a26b5ffa0e12e0bbe753c5ecde5d0fe8c8aafb7e0f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_price",
+              "type": "uint256"
+            }
+          ],
+          "name": "Accepted",
+          "type": "event"
+        },
+        "0x6d8fa101c43f0a83df4599af9a8ec9d628694c1be1ecb18b7a7c0b2092fed114": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            }
+          ],
+          "name": "isActiveEvent",
+          "type": "event"
+        },
+        "0x2ee07c00c7d8a76ac8e1f4ac489306e1152c6237c04db5744eefb680abda139b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "closeEvent",
+          "type": "event"
+        },
+        "0x3f32684a32a11dabdbb8c0177de80aa3ae36a004d75210335b49e544e48cd0aa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_oracle",
+              "type": "address"
+            }
+          ],
+          "name": "OracleSet",
+          "type": "event"
+        },
+        "0x83686d7bfba5479fc6d3d3ab2a647a663c5b10a5c481738403be00aade886244": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_status",
+              "type": "string"
+            }
+          ],
+          "name": "flightStatusEvent",
+          "type": "event"
+        },
+        "0xaa50243f1642e86315840d311dd5f41d22480200d3ebe4e4a20d76261813761e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            }
+          ],
+          "name": "InsuranceExecuted",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x47820cbe8c3d87a6c957c481ad4147ab250dff85",
+      "updated_at": 1505724842939
+    },
+    "1505725528321": {
+      "events": {
+        "0x37f17630421389651c2f915cbbabec25709cca7f6f5254e99db486affb09ecc7": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_durationInBlocks",
+              "type": "uint256"
+            }
+          ],
+          "name": "InsuranceRequest",
+          "type": "event"
+        },
+        "0x960f83bc4c13bb9e62175b41a1f6e035ac4f89ef35ac769dc4d1a4b18714a8e5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_paid",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_from",
+              "type": "address"
+            }
+          ],
+          "name": "confirmEvent",
+          "type": "event"
+        },
+        "0x7e5bfac627f690db5cb66b596e081d172923751dcc9cd0fe2e821c9813d636ab": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_success",
+              "type": "bool"
+            },
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "triggerEvent",
+          "type": "event"
+        },
+        "0x8803fc454569835e33f189a26b5ffa0e12e0bbe753c5ecde5d0fe8c8aafb7e0f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_price",
+              "type": "uint256"
+            }
+          ],
+          "name": "Accepted",
+          "type": "event"
+        },
+        "0x6d8fa101c43f0a83df4599af9a8ec9d628694c1be1ecb18b7a7c0b2092fed114": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            }
+          ],
+          "name": "isActiveEvent",
+          "type": "event"
+        },
+        "0x2ee07c00c7d8a76ac8e1f4ac489306e1152c6237c04db5744eefb680abda139b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "closeEvent",
+          "type": "event"
+        },
+        "0x3f32684a32a11dabdbb8c0177de80aa3ae36a004d75210335b49e544e48cd0aa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_oracle",
+              "type": "address"
+            }
+          ],
+          "name": "OracleSet",
+          "type": "event"
+        },
+        "0x83686d7bfba5479fc6d3d3ab2a647a663c5b10a5c481738403be00aade886244": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_status",
+              "type": "string"
+            }
+          ],
+          "name": "flightStatusEvent",
+          "type": "event"
+        },
+        "0xaa50243f1642e86315840d311dd5f41d22480200d3ebe4e4a20d76261813761e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            }
+          ],
+          "name": "InsuranceExecuted",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x47820cbe8c3d87a6c957c481ad4147ab250dff85",
+      "updated_at": 1505725535860
+    },
+    "1505725543451": {
+      "events": {
+        "0x37f17630421389651c2f915cbbabec25709cca7f6f5254e99db486affb09ecc7": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_durationInBlocks",
+              "type": "uint256"
+            }
+          ],
+          "name": "InsuranceRequest",
+          "type": "event"
+        },
+        "0x960f83bc4c13bb9e62175b41a1f6e035ac4f89ef35ac769dc4d1a4b18714a8e5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_paid",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_from",
+              "type": "address"
+            }
+          ],
+          "name": "confirmEvent",
+          "type": "event"
+        },
+        "0x7e5bfac627f690db5cb66b596e081d172923751dcc9cd0fe2e821c9813d636ab": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_success",
+              "type": "bool"
+            },
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "triggerEvent",
+          "type": "event"
+        },
+        "0x8803fc454569835e33f189a26b5ffa0e12e0bbe753c5ecde5d0fe8c8aafb7e0f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_price",
+              "type": "uint256"
+            }
+          ],
+          "name": "Accepted",
+          "type": "event"
+        },
+        "0x6d8fa101c43f0a83df4599af9a8ec9d628694c1be1ecb18b7a7c0b2092fed114": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            }
+          ],
+          "name": "isActiveEvent",
+          "type": "event"
+        },
+        "0x2ee07c00c7d8a76ac8e1f4ac489306e1152c6237c04db5744eefb680abda139b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "closeEvent",
+          "type": "event"
+        },
+        "0x3f32684a32a11dabdbb8c0177de80aa3ae36a004d75210335b49e544e48cd0aa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_oracle",
+              "type": "address"
+            }
+          ],
+          "name": "OracleSet",
+          "type": "event"
+        },
+        "0x83686d7bfba5479fc6d3d3ab2a647a663c5b10a5c481738403be00aade886244": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_status",
+              "type": "string"
+            }
+          ],
+          "name": "flightStatusEvent",
+          "type": "event"
+        },
+        "0xaa50243f1642e86315840d311dd5f41d22480200d3ebe4e4a20d76261813761e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            }
+          ],
+          "name": "InsuranceExecuted",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x47820cbe8c3d87a6c957c481ad4147ab250dff85",
+      "updated_at": 1505725550805
+    },
+    "1505725990635": {
+      "events": {
+        "0x37f17630421389651c2f915cbbabec25709cca7f6f5254e99db486affb09ecc7": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_durationInBlocks",
+              "type": "uint256"
+            }
+          ],
+          "name": "InsuranceRequest",
+          "type": "event"
+        },
+        "0x960f83bc4c13bb9e62175b41a1f6e035ac4f89ef35ac769dc4d1a4b18714a8e5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_paid",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_from",
+              "type": "address"
+            }
+          ],
+          "name": "confirmEvent",
+          "type": "event"
+        },
+        "0x7e5bfac627f690db5cb66b596e081d172923751dcc9cd0fe2e821c9813d636ab": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_success",
+              "type": "bool"
+            },
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "triggerEvent",
+          "type": "event"
+        },
+        "0x8803fc454569835e33f189a26b5ffa0e12e0bbe753c5ecde5d0fe8c8aafb7e0f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_price",
+              "type": "uint256"
+            }
+          ],
+          "name": "Accepted",
+          "type": "event"
+        },
+        "0x6d8fa101c43f0a83df4599af9a8ec9d628694c1be1ecb18b7a7c0b2092fed114": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            }
+          ],
+          "name": "isActiveEvent",
+          "type": "event"
+        },
+        "0x2ee07c00c7d8a76ac8e1f4ac489306e1152c6237c04db5744eefb680abda139b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "closeEvent",
+          "type": "event"
+        },
+        "0x3f32684a32a11dabdbb8c0177de80aa3ae36a004d75210335b49e544e48cd0aa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_oracle",
+              "type": "address"
+            }
+          ],
+          "name": "OracleSet",
+          "type": "event"
+        },
+        "0x83686d7bfba5479fc6d3d3ab2a647a663c5b10a5c481738403be00aade886244": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_status",
+              "type": "string"
+            }
+          ],
+          "name": "flightStatusEvent",
+          "type": "event"
+        },
+        "0xaa50243f1642e86315840d311dd5f41d22480200d3ebe4e4a20d76261813761e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            }
+          ],
+          "name": "InsuranceExecuted",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x47820cbe8c3d87a6c957c481ad4147ab250dff85",
+      "updated_at": 1505725998268
+    },
+    "1505726029477": {
+      "events": {
+        "0x37f17630421389651c2f915cbbabec25709cca7f6f5254e99db486affb09ecc7": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_durationInBlocks",
+              "type": "uint256"
+            }
+          ],
+          "name": "InsuranceRequest",
+          "type": "event"
+        },
+        "0x960f83bc4c13bb9e62175b41a1f6e035ac4f89ef35ac769dc4d1a4b18714a8e5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_paid",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_from",
+              "type": "address"
+            }
+          ],
+          "name": "confirmEvent",
+          "type": "event"
+        },
+        "0x7e5bfac627f690db5cb66b596e081d172923751dcc9cd0fe2e821c9813d636ab": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_success",
+              "type": "bool"
+            },
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "triggerEvent",
+          "type": "event"
+        },
+        "0x8803fc454569835e33f189a26b5ffa0e12e0bbe753c5ecde5d0fe8c8aafb7e0f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_price",
+              "type": "uint256"
+            }
+          ],
+          "name": "Accepted",
+          "type": "event"
+        },
+        "0x6d8fa101c43f0a83df4599af9a8ec9d628694c1be1ecb18b7a7c0b2092fed114": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            }
+          ],
+          "name": "isActiveEvent",
+          "type": "event"
+        },
+        "0x2ee07c00c7d8a76ac8e1f4ac489306e1152c6237c04db5744eefb680abda139b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "closeEvent",
+          "type": "event"
+        },
+        "0x3f32684a32a11dabdbb8c0177de80aa3ae36a004d75210335b49e544e48cd0aa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_oracle",
+              "type": "address"
+            }
+          ],
+          "name": "OracleSet",
+          "type": "event"
+        },
+        "0x83686d7bfba5479fc6d3d3ab2a647a663c5b10a5c481738403be00aade886244": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_status",
+              "type": "string"
+            }
+          ],
+          "name": "flightStatusEvent",
+          "type": "event"
+        },
+        "0xaa50243f1642e86315840d311dd5f41d22480200d3ebe4e4a20d76261813761e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            }
+          ],
+          "name": "InsuranceExecuted",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x47820cbe8c3d87a6c957c481ad4147ab250dff85",
+      "updated_at": 1505726036680
+    },
+    "1505726374523": {
+      "events": {
+        "0x37f17630421389651c2f915cbbabec25709cca7f6f5254e99db486affb09ecc7": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_durationInBlocks",
+              "type": "uint256"
+            }
+          ],
+          "name": "InsuranceRequest",
+          "type": "event"
+        },
+        "0x960f83bc4c13bb9e62175b41a1f6e035ac4f89ef35ac769dc4d1a4b18714a8e5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_paid",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_from",
+              "type": "address"
+            }
+          ],
+          "name": "confirmEvent",
+          "type": "event"
+        },
+        "0x7e5bfac627f690db5cb66b596e081d172923751dcc9cd0fe2e821c9813d636ab": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_success",
+              "type": "bool"
+            },
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "triggerEvent",
+          "type": "event"
+        },
+        "0x8803fc454569835e33f189a26b5ffa0e12e0bbe753c5ecde5d0fe8c8aafb7e0f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_price",
+              "type": "uint256"
+            }
+          ],
+          "name": "Accepted",
+          "type": "event"
+        },
+        "0x6d8fa101c43f0a83df4599af9a8ec9d628694c1be1ecb18b7a7c0b2092fed114": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            }
+          ],
+          "name": "isActiveEvent",
+          "type": "event"
+        },
+        "0x2ee07c00c7d8a76ac8e1f4ac489306e1152c6237c04db5744eefb680abda139b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "closeEvent",
+          "type": "event"
+        },
+        "0x3f32684a32a11dabdbb8c0177de80aa3ae36a004d75210335b49e544e48cd0aa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_oracle",
+              "type": "address"
+            }
+          ],
+          "name": "OracleSet",
+          "type": "event"
+        },
+        "0x83686d7bfba5479fc6d3d3ab2a647a663c5b10a5c481738403be00aade886244": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_status",
+              "type": "string"
+            }
+          ],
+          "name": "flightStatusEvent",
+          "type": "event"
+        },
+        "0xaa50243f1642e86315840d311dd5f41d22480200d3ebe4e4a20d76261813761e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            }
+          ],
+          "name": "InsuranceExecuted",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x47820cbe8c3d87a6c957c481ad4147ab250dff85",
+      "updated_at": 1505726381893
+    },
+    "1505726446761": {
+      "events": {
+        "0x37f17630421389651c2f915cbbabec25709cca7f6f5254e99db486affb09ecc7": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_durationInBlocks",
+              "type": "uint256"
+            }
+          ],
+          "name": "InsuranceRequest",
+          "type": "event"
+        },
+        "0x960f83bc4c13bb9e62175b41a1f6e035ac4f89ef35ac769dc4d1a4b18714a8e5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_paid",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_from",
+              "type": "address"
+            }
+          ],
+          "name": "confirmEvent",
+          "type": "event"
+        },
+        "0x7e5bfac627f690db5cb66b596e081d172923751dcc9cd0fe2e821c9813d636ab": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_success",
+              "type": "bool"
+            },
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "triggerEvent",
+          "type": "event"
+        },
+        "0x8803fc454569835e33f189a26b5ffa0e12e0bbe753c5ecde5d0fe8c8aafb7e0f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_price",
+              "type": "uint256"
+            }
+          ],
+          "name": "Accepted",
+          "type": "event"
+        },
+        "0x6d8fa101c43f0a83df4599af9a8ec9d628694c1be1ecb18b7a7c0b2092fed114": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            }
+          ],
+          "name": "isActiveEvent",
+          "type": "event"
+        },
+        "0x2ee07c00c7d8a76ac8e1f4ac489306e1152c6237c04db5744eefb680abda139b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "closeEvent",
+          "type": "event"
+        },
+        "0x3f32684a32a11dabdbb8c0177de80aa3ae36a004d75210335b49e544e48cd0aa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_oracle",
+              "type": "address"
+            }
+          ],
+          "name": "OracleSet",
+          "type": "event"
+        },
+        "0x83686d7bfba5479fc6d3d3ab2a647a663c5b10a5c481738403be00aade886244": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_status",
+              "type": "string"
+            }
+          ],
+          "name": "flightStatusEvent",
+          "type": "event"
+        },
+        "0xaa50243f1642e86315840d311dd5f41d22480200d3ebe4e4a20d76261813761e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            }
+          ],
+          "name": "InsuranceExecuted",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x47820cbe8c3d87a6c957c481ad4147ab250dff85",
+      "updated_at": 1505726454140
+    },
+    "1505726464238": {
+      "events": {
+        "0x37f17630421389651c2f915cbbabec25709cca7f6f5254e99db486affb09ecc7": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_durationInBlocks",
+              "type": "uint256"
+            }
+          ],
+          "name": "InsuranceRequest",
+          "type": "event"
+        },
+        "0x960f83bc4c13bb9e62175b41a1f6e035ac4f89ef35ac769dc4d1a4b18714a8e5": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_paid",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_from",
+              "type": "address"
+            }
+          ],
+          "name": "confirmEvent",
+          "type": "event"
+        },
+        "0x7e5bfac627f690db5cb66b596e081d172923751dcc9cd0fe2e821c9813d636ab": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_success",
+              "type": "bool"
+            },
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "triggerEvent",
+          "type": "event"
+        },
+        "0x8803fc454569835e33f189a26b5ffa0e12e0bbe753c5ecde5d0fe8c8aafb7e0f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_price",
+              "type": "uint256"
+            }
+          ],
+          "name": "Accepted",
+          "type": "event"
+        },
+        "0x6d8fa101c43f0a83df4599af9a8ec9d628694c1be1ecb18b7a7c0b2092fed114": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_airlinecode",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_flightnumber",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_originflightdate",
+              "type": "string"
+            }
+          ],
+          "name": "isActiveEvent",
+          "type": "event"
+        },
+        "0x2ee07c00c7d8a76ac8e1f4ac489306e1152c6237c04db5744eefb680abda139b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            }
+          ],
+          "name": "closeEvent",
+          "type": "event"
+        },
+        "0x3f32684a32a11dabdbb8c0177de80aa3ae36a004d75210335b49e544e48cd0aa": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_oracle",
+              "type": "address"
+            }
+          ],
+          "name": "OracleSet",
+          "type": "event"
+        },
+        "0x83686d7bfba5479fc6d3d3ab2a647a663c5b10a5c481738403be00aade886244": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_status",
+              "type": "string"
+            }
+          ],
+          "name": "flightStatusEvent",
+          "type": "event"
+        },
+        "0xaa50243f1642e86315840d311dd5f41d22480200d3ebe4e4a20d76261813761e": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_collateral",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "_customer",
+              "type": "address"
+            }
+          ],
+          "name": "InsuranceExecuted",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x47820cbe8c3d87a6c957c481ad4147ab250dff85",
+      "updated_at": 1505726471447
     }
   },
   "schema_version": "0.0.5",
-  "updated_at": 1505724737795
+  "updated_at": 1505726471447
 }

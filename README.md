@@ -1,3 +1,20 @@
+
+# Insurance App in 
+
+1. testrpc starten, contracts deployen und oracle starten
+```
+cd ./app
+gulp test // führt unit tests durch
+gulp 
+```
+
+2. Die Contract Funktionen sind via ./app/api.js ausführbar, siehe ./app/app.js
+```
+const app = require("./api.js");
+```
+
+
+
 # Ethereum Template (Work in progress)
 
 * Falls Docker installiert ist, initial folgenden Befehl ausführen: 
