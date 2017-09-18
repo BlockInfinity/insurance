@@ -39,7 +39,7 @@ contract FlightDelayContract is usingMGSOracle {
     bool public isRequested;
 
     function FlightDelayContract(){
-        insurer = msg.sender;
+        insurer = tx.origin;
         genesisBlock = block.number;
     }
 

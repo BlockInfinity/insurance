@@ -9,7 +9,6 @@ const eth = web3.eth;
 var instanceFlightDelayContract = web3.FlightDelayContract;
 
 
-
 module.exports = {
 
     createFlightDelayContract: function(_sender) {

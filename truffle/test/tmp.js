@@ -1,19 +1,16 @@
         const request = require("request");
 
 
-
-
-
         const flightdata = {
             airlinecode: "LH",
-            flightnumber: 1051,
-            originflightdate: "2017-09-17"
+            flightnumber: 157,
+            originflightdate: "2017-09-18"
         }
 
         var options = {
             url: 'https://developer.fraport.de/api/flights/1.0/flightDetails/' + flightdata.airlinecode + '/' + flightdata.flightnumber + '/' + flightdata.originflightdate,
             headers: {
-                "Authorization": "Bearer 3c20828255657d0bbbc017650c307b4e",
+                "Authorization": "Bearer fe9d187704da223dc1c8762447a858de",
             }
         };
 
@@ -28,7 +25,7 @@
             if (!error && response.statusCode == 200) {
                 var info = JSON.parse(body);
                 console.log(info[0].flight.flightStatus)
-                console.log(`here comes the result: ${info}`);
+                console.log(`here comes the result: ${body}`);
             }
         }
 

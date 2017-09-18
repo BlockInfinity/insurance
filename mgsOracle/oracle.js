@@ -1,10 +1,11 @@
 const web3 = require("./connector.js");
 const request = require("request");
+const path = require("path");
+const fs = require("fs");
 
 const instanceOracle = web3.Oracle;
-const instanceFlightDelayContract = web3.FlightDelayContract;
 
-console.log("instanceOracle",instanceOracle.address)
+console.log("instanceOracle", instanceOracle.address)
 instanceOracle.Query(function(error, result) {
     if (!error) {
         console.log("in Query listener")
@@ -19,7 +20,16 @@ function requestApi(result) {
     let _flightnumber = result.args._flightnumber
     let _originflightdate = result.args._originflightdate
     let _accesstoken = result.args._accessToken
+    let cbaddress = result.args.cbaddress
     let id = result.args.id
+
+    let abiPath = path.join(__dirname, '..', '/truffle/build/contracts/', "FlightDelayContract.json");
+    let abi_contract = fs.readFileSync(abiPath).toString();
+    abi_contract = JSON.parse(abi_contract).abi;
+    let contract = web3.eth.contract(abi_contract);
+    let instanceFlightDelayContract = contract.at(cbaddress);
+
+    console.log("instanceFlightDelayContract.address ", instanceFlightDelayContract.address);
 
     let options = {
         url: 'https://developer.fraport.de/api/flights/1.0/flightDetails/' + _airlinecode + '/' + _flightnumber + '/' + _originflightdate,
