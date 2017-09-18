@@ -12,9 +12,9 @@ var instanceFlightDelayContract = web3.FlightDelayContract;
 
 module.exports = {
 
-    createFlightDelayContract: function(_accountNo) {
+    createFlightDelayContract: function(_sender) {
 
-        instanceInsuranceContractFactory.createFlightDelayContract({ from: eth.accounts[_accountNo], gas: 4000000 });
+        instanceInsuranceContractFactory.createFlightDelayContract({ from: _sender, gas: 4000000 });
 
         return new Promise((resolve, reject) => {
             instanceInsuranceContractFactory.FlightDelayContractCreation((error, result) => {
@@ -34,9 +34,9 @@ module.exports = {
         return(instanceFlightDelayContract.address)
     },
 
-    setOracle: function(_oracle, _accountNo) {
+    setOracle: function(_oracle, _sender) {
 
-        instanceFlightDelayContract.setOracle(_oracle, { from: eth.accounts[_accountNo] });
+        instanceFlightDelayContract.setOracle(_oracle, { from: _sender });
 
         return new Promise((resolve, reject) => {
             instanceFlightDelayContract.OracleSet((error, result) => {
@@ -48,9 +48,9 @@ module.exports = {
 
     },
 
-    request: function(_airlinecode, _flightnumber, _originflightdate, _insuranceValue, _durationInBlocks, _accountNo) {
+    request: function(_airlinecode, _flightnumber, _originflightdate, _insuranceValue, _durationInBlocks, _sender) {
 
-        instanceFlightDelayContract.request(_airlinecode, _flightnumber, _originflightdate, _insuranceValue, _durationInBlocks, { from: eth.accounts[_accountNo], gas: 4000000 })
+        instanceFlightDelayContract.request(_airlinecode, _flightnumber, _originflightdate, _insuranceValue, _durationInBlocks, { from: _sender, gas: 4000000 })
 
         return new Promise((resolve, reject) => {
             instanceFlightDelayContract.InsuranceRequest((error, result) => {
@@ -62,9 +62,9 @@ module.exports = {
 
     },
 
-    accept: function(_price, _accountNo, _value) {
+    accept: function(_price, _sender, _value) {
 
-        instanceFlightDelayContract.accept(_price, { from: eth.accounts[_accountNo], value: _value });
+        instanceFlightDelayContract.accept(_price, { from: _sender, value: _value });
 
         return new Promise((resolve, reject) => {
             instanceFlightDelayContract.Accepted((error, result) => {
@@ -77,9 +77,9 @@ module.exports = {
 
     },
 
-    confirm: function(_accountNo, _value) {
+    confirm: function(_sender, _value) {
 
-        instanceFlightDelayContract.confirm({ from: eth.accounts[_accountNo], value: _value });
+        instanceFlightDelayContract.confirm({ from: _sender, value: _value });
 
         return new Promise((resolve, reject) => {
             instanceFlightDelayContract.isActiveEvent((error, result) => {
