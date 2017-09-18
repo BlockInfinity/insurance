@@ -133,6 +133,7 @@ contract FlightDelayContract is usingMGSOracle {
         if (sha3(result) == sha3("X") || sha3(result) == sha3("S") || sha3(result) == sha3("M") || sha3(result) == sha3("I")) {
             customer.transfer(collateral);
             InsuranceExecuted(collateral, customer);
+            isClosed = true;
         } 
     }
   
