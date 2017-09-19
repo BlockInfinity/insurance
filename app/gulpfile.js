@@ -42,7 +42,7 @@ gulp.task('truffle', function(cb) {
 });
 
 
-gulp.task('start', function(cb) {
+gulp.task('app', function(cb) {
     // script.js
     const child = spawn('nodejs', ['app.js']);
 
@@ -74,17 +74,17 @@ gulp.task('init', function(cb) {
 });
 
 
-// gulp.task('start', function(cb) {
-//     gulp.start("kill");
-//     sleep.sleep(5);
-//     gulp.start("testrpc");
-//     sleep.sleep(5);
-//     gulp.start("truffle");
-//     sleep.sleep(5);
-//     gulp.start("oracle");
-//     sleep.sleep(5);
-//     gulp.start("start");
-// });
+gulp.task('run', function(cb) {
+    gulp.start("kill");
+    sleep.sleep(5);
+    gulp.start("testrpc");
+    sleep.sleep(5);
+    gulp.start("truffle");
+    sleep.sleep(5);
+    gulp.start("oracle");
+    sleep.sleep(5);
+    gulp.start("app");
+});
 
 
 gulp.task('test', function(cb) {

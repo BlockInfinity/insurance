@@ -4,7 +4,8 @@
   "description": "simple oracle for testing purposes",
   "main": "connector.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "run": "gulp run"
   },
   "author": "mgsgde",
   "license": "ISC",
