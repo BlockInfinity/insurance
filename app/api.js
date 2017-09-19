@@ -71,13 +71,14 @@ module.exports = {
 
     },
 
-    request: function( _airlinecode, _flightnumber, _originflightdate, _insuranceValue, _durationInBlocks, _sender) {
+    request: function(_airlinecode, _flightnumber, _originflightdate, _insuranceValue, _durationInBlocks, _sender) {
 
         instanceFlightDelayContract.request(_airlinecode, _flightnumber, _originflightdate, _insuranceValue, _durationInBlocks, { from: _sender, gas: 4000000 });
 
         return new Promise((resolve, reject) => {
             instanceFlightDelayContract.InsuranceRequest((error, result) => {
                 if (!error) {
+                    console.log("request ok");
 
                     let contract = contractCollection.findOne({ 'address': instanceFlightDelayContract.address });
                     contract.airlinecode = _airlinecode;
@@ -98,13 +99,14 @@ module.exports = {
 
     },
 
-    accept: function( _price, _sender, _value) {
+    accept: function(_price, _sender, _value) {
 
         instanceFlightDelayContract.accept(_price, { from: _sender, value: _value });
 
         return new Promise((resolve, reject) => {
             instanceFlightDelayContract.Accepted((error, result) => {
                 if (!error) {
+                    console.log("accept ok");
 
                     let contract = contractCollection.findOne({ 'address': instanceFlightDelayContract.address });
                     contract.collateral = _value;
@@ -120,13 +122,15 @@ module.exports = {
 
     },
 
-    confirm: function( _sender, _value) {
+    confirm: function(_sender, _value) {
 
         instanceFlightDelayContract.confirm({ from: _sender, value: _value });
 
         return new Promise((resolve, reject) => {
             instanceFlightDelayContract.isActiveEvent((error, result) => {
                 if (!error) {
+                    console.log("confirm ok");
+
 
                     let contract = contractCollection.findOne({ 'address': instanceFlightDelayContract.address });
                     contract.paid = _value;
@@ -139,9 +143,9 @@ module.exports = {
         })
 
     },
-    trigger: function() {
+    trigger: function(_sender) {
 
-        instanceFlightDelayContract.trigger(_accessToken);
+        instanceFlightDelayContract.trigger(_accessToken, {from: _sender});
 
         return new Promise(function(resolve, reject) {
             instanceFlightDelayContract.flightStatusEvent(function(error, result) {

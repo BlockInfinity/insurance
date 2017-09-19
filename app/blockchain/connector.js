@@ -49,6 +49,7 @@ try {
         var contractName = files[x].replace('.json', '');
         abiPath = path.join(__dirname, '..', '..', '/truffle/build/contracts/', contractName + '.json');
         abi_contract = fs.readFileSync(abiPath).toString();
+        // console.log(abi_contract)
         abi_contract = JSON.parse(abi_contract).abi;
         contract = web3.eth.contract(abi_contract);
         instance = contract.at(addresses[contractName]);

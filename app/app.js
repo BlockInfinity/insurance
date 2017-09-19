@@ -16,25 +16,39 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 var _insurer = eth.accounts[0];
 var _insurant = eth.accounts[1];
 
-app.get('/', function (req, res) {
-	res.sendfile('public/index.html');
+
+app.get('/', function(req, res) {
+    res.sendfile('public/index.html');
 })
 
 var requests = [];
 
 var update = function(id, data) {
-	for (var i=0; i<requests.length; i++) {
-		if (requests[i].id === id) {
-			return _.extend(requests[i], data);
-		}
-	}
-	return null;
+    for (var i = 0; i < requests.length; i++) {
+        if (requests[i].id === id) {
+            return _.extend(requests[i], data);
+        }
+    }
+    return null;
 }
 
 // return requests
 app.get('/api/requests', function(req, res) {
-  res.send(requests);
+    res.send(requests);
 });
+
+// return requests
+app.get('/api/getBalanceFromInsurer', function(req, res) {
+    let balance = eth.getBalance(_insurer);
+    res.send(balance);
+});
+
+// return requests
+app.get('/api/getBalanceFromInsurant', function(req, res) {
+    let balance = eth.getBalance(_insurant);
+    res.send(balance);
+});
+
 
 app.post('/api/request', function(request, response) {
     var airlinecode = request.body.airlinecode;
@@ -44,26 +58,36 @@ app.post('/api/request', function(request, response) {
 
     console.log(request.body)
 
-	api.createFlightDelayContract(_insurer).then(res => {
+    api.createFlightDelayContract(_insurer).then(res => {
         _addr = res.args._contract;
         _from = res.args._from;
         console.log(`FlightDelayContract with address ${_addr} was created by ${_from} \n`)
 
-	    let _contractInfo = api.getContract()
+        let _contractInfo = api.getContract()
         console.log(`The current FlightDelayContract info: \n ${JSON.stringify(_contractInfo)}`)
 
         api.setDefaultFlightDelayContract(_addr);
 
+        api.setOracle(web3.Oracle.address, _insurer);
+
         api.request(airlinecode, flightnumber, originflightdate, insuranceValue, 9999, _insurant).then(res2 => {
-            requests.push({id: _addr, airlinecode: airlinecode, flightnumber: flightnumber, 
-                originflightdate: originflightdate , insuranceValue: insuranceValue, price: null, state: 'requested'})
-         	response.status(200);
-         	response.send('request created');
+            requests.push({
+                id: _addr,
+                airlinecode: airlinecode,
+                flightnumber: flightnumber,
+                originflightdate: originflightdate,
+                status: '',
+                insuranceValue: insuranceValue,
+                price: null,
+                state: 'requested'
+            })
+            response.status(200);
+            response.send('request created');
         }, err2 => {
             response.status(500);
             response.send('request create error');
         });
-	}, err => {
+    }, err => {
         response.status(500);
         response.send('request unable to create contract');
     });
@@ -77,17 +101,17 @@ app.post('/api/accept', function(request, response) {
 
     var result = update(id, { price: price, state: 'accepted' });
     if (!result) {
-    	response.status(500);
-		response.send('request not found');
+        response.status(500);
+        response.send('request not found');
     }
 
     api.accept(price, _insurer, result.insuranceValue).then(res => {
-    	response.status(200);
-    	response.send('request accepted');
-	}, err => {
-		response.status(500);
-		response.send('request accepted error');
-  	});
+        response.status(200);
+        response.send('request accepted');
+    }, err => {
+        response.status(500);
+        response.send('request accepted error');
+    });
 });
 
 app.post('/api/confirm', function(request, response) {
@@ -97,17 +121,17 @@ app.post('/api/confirm', function(request, response) {
 
     var result = update(id, { state: 'confirmed' });
     if (!result) {
-    	response.status(500);
-		response.send('request not found');
+        response.status(500);
+        response.send('request not found');
     }
 
     api.confirm(_insurant, result.price).then(res => {
-    	response.status(200);
-    	response.send('request confirmed');
-	}, err => {
-		response.status(500);
-		response.send('request confirm error');
-  	});
+        response.status(200);
+        response.send('request confirmed');
+    }, err => {
+        response.status(500);
+        response.send('request confirm error');
+    });
 });
 
 app.post('/api/trigger', function(request, response) {
@@ -117,17 +141,24 @@ app.post('/api/trigger', function(request, response) {
 
     var result = update(id, { state: 'triggered' });
     if (!result) {
-    	response.status(500);
-		response.send('request not found');
+        response.status(500);
+        response.send('request not found');
     }
 
-    api.trigger().then(res => {
-    	response.status(200);
-    	response.send('request triggered');
-	}, err => {
-		response.status(500);
-		response.send('request trigger error');
-  	});
+    api.trigger(_insurant).then(res => {
+        let output = res.args._status;
+
+        if (output == "") {
+            output = "OK"
+        }
+
+        update(id, { status: output });
+        response.status(200);
+        response.send('request triggered');
+    }, err => {
+        response.status(500);
+        response.send('request trigger error');
+    });
 });
 
 app.post('/api/close', function(request, response) {
@@ -137,19 +168,19 @@ app.post('/api/close', function(request, response) {
 
     var result = update(id, { state: 'closed' });
     if (!result) {
-    	response.status(500);
-		response.send('request not found');
+        response.status(500);
+        response.send('request not found');
     }
 
     api.close().then(res => {
-    	response.status(200);
-    	response.send('request closed');
-	}, err => {
-		response.status(500);
-		response.send('request close error');
-  	});
+        response.status(200);
+        response.send('request closed');
+    }, err => {
+        response.status(500);
+        response.send('request close error');
+    });
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+app.listen(3000, function() {
+    console.log('Example app listening on port 3000!')
 });

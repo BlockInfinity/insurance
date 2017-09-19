@@ -39,7 +39,7 @@ function requestApi(result) {
     };
 
     function callback(error, response, body) {
-        if (!error && response.statusCode == 200) {
+        if (!error && response && response.statusCode == 200) {
             let info = JSON.parse(body);
             instanceFlightDelayContract.__callback(id, info[0].flight.flightStatus)
         }
