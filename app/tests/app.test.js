@@ -14,7 +14,7 @@ var _durationInBlocks = 100;
 var _customer = eth.accounts[1];
 var _insurer = eth.accounts[0];
 var _price = 500;
-var _accessToken = "fe9d187704da223dc1c8762447a858de";
+var _accessToken = "5974c487e13d641c70f5dbdaa1a9f570";
 var _addr;
 
 // todo: in memory die contracts abspeichern samt status 
@@ -93,7 +93,7 @@ describe('app.js', function() {
 
     it('trigger', function(done) {
         this.timeout(30000); // falls events nicht geworfen werden beendet timer den test
-        app.trigger(_accessToken).then(res => {
+        app.trigger().then(res => {
 
             done();
         })

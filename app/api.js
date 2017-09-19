@@ -10,6 +10,7 @@ const instanceInsuranceContractFactory = web3.InsuranceContractFactory;
 const loki = require("lokijs");
 var db = new loki('loki.json')
 var contractCollection = db.addCollection('contractCollection')
+var _accessToken = "5974c487e13d641c70f5dbdaa1a9f570";
 
 module.exports = {
 
@@ -138,7 +139,7 @@ module.exports = {
         })
 
     },
-    trigger: function( _accessToken) {
+    trigger: function() {
 
         instanceFlightDelayContract.trigger(_accessToken);
 

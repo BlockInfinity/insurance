@@ -5,7 +5,7 @@
   "main": "connector.js",
   "scripts": {
     "test": "gulp test",
-    "run": "gulp run"
+    "start": "gulp run"
   },
   "author": "mgsgde",
   "license": "ISC",
