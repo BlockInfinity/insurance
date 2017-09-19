@@ -1,7 +1,13 @@
-<<<<<<< HEAD
-# allianz
+# Starten Ohne Gulp
 
-test
+ testrpc --mnemonic "my test example" --accounts 100
+ cd ./truffle
+ truffle deploy --network local
+ cd ../app
+ nodejs oracle/oracle.js
+ mocha tests/app.test.js 
+ nodejs app.js
+ 
 =======
 
 # Insurance App in 
