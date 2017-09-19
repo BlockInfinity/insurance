@@ -76,9 +76,9 @@ app.post('/api/request', function(request, response) {
                 airlinecode: airlinecode,
                 flightnumber: flightnumber,
                 originflightdate: originflightdate,
-                status: '',
+                status: 'unknown',
                 insuranceValue: insuranceValue,
-                price: null,
+                price: -1,
                 state: 'requested'
             })
             response.status(200);
@@ -99,13 +99,14 @@ app.post('/api/accept', function(request, response) {
 
     api.setDefaultFlightDelayContract(id);
 
-    var result = update(id, { price: price, state: 'accepted' });
+    var result = update(id, {});
     if (!result) {
         response.status(500);
         response.send('request not found');
     }
 
     api.accept(price, _insurer, result.insuranceValue).then(res => {
+        update(id, { price: price, state: 'accepted' });
         response.status(200);
         response.send('request accepted');
     }, err => {
@@ -119,13 +120,14 @@ app.post('/api/confirm', function(request, response) {
 
     api.setDefaultFlightDelayContract(id);
 
-    var result = update(id, { state: 'confirmed' });
+    var result = update(id, {});
     if (!result) {
         response.status(500);
         response.send('request not found');
     }
 
     api.confirm(_insurant, result.price).then(res => {
+        update(id, { state: 'confirmed' });
         response.status(200);
         response.send('request confirmed');
     }, err => {
@@ -139,7 +141,7 @@ app.post('/api/trigger', function(request, response) {
 
     api.setDefaultFlightDelayContract(id);
 
-    var result = update(id, { state: 'triggered' });
+    var result = update(id, {});
     if (!result) {
         response.status(500);
         response.send('request not found');
@@ -147,12 +149,11 @@ app.post('/api/trigger', function(request, response) {
 
     api.trigger(_insurant).then(res => {
         let output = res.args._status;
-
         if (output == "") {
             output = "OK"
         }
 
-        update(id, { status: output });
+        update(id, { state: 'triggered', status: output });
         response.status(200);
         response.send('request triggered');
     }, err => {
@@ -166,13 +167,14 @@ app.post('/api/close', function(request, response) {
 
     api.setDefaultFlightDelayContract(id);
 
-    var result = update(id, { state: 'closed' });
+    var result = update(id, {});
     if (!result) {
         response.status(500);
         response.send('request not found');
     }
 
     api.close().then(res => {
+        update(id, { state: 'closed' });
         response.status(200);
         response.send('request closed');
     }, err => {
