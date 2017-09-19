@@ -16,16 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 var _insurer = eth.accounts[0];
 var _insurant = eth.accounts[1];
 
-// api.createFlightDelayContract(_insurer).then(res => {
-//     // console.log(res.args._contract + " created");
-//     _addr = res.args._contract;
-//     _from = res.args._from;
-//     console.log(`FlightDelayContract with address ${_addr} was created by ${_from} \n`)
-
-//     let _contractInfo = api.getContract(_addr)
-//     console.log(`The current FlightDelayContract info: \n ${JSON.stringify(_contractInfo)}`)
-// })
-
 app.get('/', function (req, res) {
 	res.sendfile('public/index.html');
 })
@@ -46,107 +36,118 @@ app.get('/api/requests', function(req, res) {
   res.send(requests);
 });
 
-app.post('/api/request', function(req, res) {
-    var airlinecode = req.body.airlinecode;
-    var flightnumber = req.body.flightnumber;
-    var originflightdate = req.body.originflightdate;
-    var insuranceValue = req.body.insuranceValue;
+app.post('/api/request', function(request, response) {
+    var airlinecode = request.body.airlinecode;
+    var flightnumber = request.body.flightnumber;
+    var originflightdate = request.body.originflightdate;
+    var insuranceValue = request.body.insuranceValue;
+
+    console.log(request.body)
 
 	api.createFlightDelayContract(_insurer).then(res => {
-	    _addr = res.args._contract;
-	    _from = res.args._from;
-	    console.log(`FlightDelayContract with address ${_addr} was created by ${_from} \n`)
+        _addr = res.args._contract;
+        _from = res.args._from;
+        console.log(`FlightDelayContract with address ${_addr} was created by ${_from} \n`)
 
 	    let _contractInfo = api.getContract()
-	    console.log(`The current FlightDelayContract info: \n ${JSON.stringify(_contractInfo)}`)
+        console.log(`The current FlightDelayContract info: \n ${JSON.stringify(_contractInfo)}`)
 
-	    // requests.push({id: _addr, airlinecode: airlinecode, flightnumber: flightnumber, 
-    		// originflightdate: originflightdate , insuranceValue: insuranceValue, price: null, state: 'requested'})
+        api.setDefaultFlightDelayContract(_addr);
 
-	 //    api.request( airlinecode, flightnumber, originflightdate, insuranceValue, 9999, _insurant).then(res => {
-	 //    	res.status(200);
-	 //    	res.send('request created');
-		// }).catch(function (err) {
-		// 	res.status(500);
-		// 	res.send('request create error');
-	 //  	})
-	}).catch(function (err) {
-		res.status(500);
-		res.send('request unable to create contract');
-  	})
+        api.request(airlinecode, flightnumber, originflightdate, insuranceValue, 9999, _insurant).then(res2 => {
+            requests.push({id: _addr, airlinecode: airlinecode, flightnumber: flightnumber, 
+                originflightdate: originflightdate , insuranceValue: insuranceValue, price: null, state: 'requested'})
+         	response.status(200);
+         	response.send('request created');
+        }, err2 => {
+            response.status(500);
+            response.send('request create error');
+        });
+	}, err => {
+        response.status(500);
+        response.send('request unable to create contract');
+    });
 });
 
-app.post('/api/accept', function(req, res) {
-    var id = req.body.id;
-    var price = req.body.price;
+app.post('/api/accept', function(request, response) {
+    var id = request.body.id;
+    var price = request.body.price;
+
+    api.setDefaultFlightDelayContract(id);
 
     var result = update(id, { price: price, state: 'accepted' });
     if (!result) {
-    	res.status(500);
-		res.send('request not found');
+    	response.status(500);
+		response.send('request not found');
     }
 
-    api.accept( price, _insurer, result.insuranceValue).then(res => {
-    	res.status(200);
-    	res.send('request accepted');
-	}).catch(function (err) {
-		res.status(500);
-		res.send('request accepted error');
-  	})
+    api.accept(price, _insurer, result.insuranceValue).then(res => {
+    	response.status(200);
+    	response.send('request accepted');
+	}, err => {
+		response.status(500);
+		response.send('request accepted error');
+  	});
 });
 
-app.post('/api/confirm', function(req, res) {
-    var id = req.body.id;
+app.post('/api/confirm', function(request, response) {
+    var id = request.body.id;
+
+    api.setDefaultFlightDelayContract(id);
 
     var result = update(id, { state: 'confirmed' });
     if (!result) {
-    	res.status(500);
-		res.send('request not found');
+    	response.status(500);
+		response.send('request not found');
     }
 
-    api.confirm( _insurant, result.price).then(res => {
-    	res.status(200);
-    	res.send('request confirmed');
-	}).catch(function (err) {
-		res.status(500);
-		res.send('request confirm error');
-  	})
+    api.confirm(_insurant, result.price).then(res => {
+    	response.status(200);
+    	response.send('request confirmed');
+	}, err => {
+		response.status(500);
+		response.send('request confirm error');
+  	});
 });
 
-app.post('/api/trigger', function(req, res) {
-    var id = req.body.id;
+app.post('/api/trigger', function(request, response) {
+    var id = request.body.id;
+
+    api.setDefaultFlightDelayContract(id);
 
     var result = update(id, { state: 'triggered' });
     if (!result) {
-    	res.status(500);
-		res.send('request not found');
+    	response.status(500);
+		response.send('request not found');
     }
 
     api.trigger().then(res => {
-    	res.status(200);
-    	res.send('request triggered');
-	}).catch(function (err) {
-		res.status(500);
-		res.send('request trigger error');
-  	})
+    	response.status(200);
+    	response.send('request triggered');
+	}, err => {
+		response.status(500);
+		response.send('request trigger error');
+  	});
 });
 
-app.post('/api/close', function(req, res) {
-    var id = req.body.id;
+app.post('/api/close', function(request, response) {
+    var id = request.body.id;
+
+    api.setDefaultFlightDelayContract(id);
 
     var result = update(id, { state: 'closed' });
     if (!result) {
-    	res.status(500);
-		res.send('request not found');
+    	response.status(500);
+		response.send('request not found');
     }
 
     api.close().then(res => {
-    	res.status(200);
-    	res.send('request closed');
-	}).catch(function (err) {
-		res.status(500);
-		res.send('request close error');
-  	})
+    	response.status(200);
+    	response.send('request closed');
+	}, err => {
+		response.status(500);
+		response.send('request close error');
+  	});
 });
 
 app.listen(3000, function () {
