@@ -96,7 +96,6 @@ module.exports = {
                 } else { reject(error); }
             })
         });
-
     },
 
     accept: function(_price, _sender, _value) {
@@ -118,8 +117,6 @@ module.exports = {
                 } else { reject(error); }
             })
         })
-
-
     },
 
     confirm: function(_sender, _value) {
@@ -141,8 +138,8 @@ module.exports = {
                 } else { reject(error); }
             })
         })
-
     },
+
     trigger: function(_sender) {
 
         instanceFlightDelayContract.trigger(_accessToken, {from: _sender});
@@ -154,8 +151,8 @@ module.exports = {
                 } else { reject(error); }
             })
         });
-
     },
+
     close: function() {
 
         instanceFlightDelayContract.close();
@@ -180,10 +177,8 @@ module.exports = {
     },
 
     web3: web3,
-
     contractCollection: contractCollection,
 }
-
 
 instanceFlightDelayContract.InsuranceExecuted(function(error, result) {
     if (!error) {

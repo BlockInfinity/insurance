@@ -16,7 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 var _insurer = eth.accounts[0];
 var _insurant = eth.accounts[1];
 
-
 app.get('/', function(req, res) {
     res.sendfile('public/index.html');
 })
@@ -48,7 +47,6 @@ app.get('/api/getBalanceFromInsurant', function(req, res) {
     let balance = eth.getBalance(_insurant);
     res.send(balance);
 });
-
 
 app.post('/api/request', function(request, response) {
     var airlinecode = request.body.airlinecode;
@@ -184,5 +182,5 @@ app.post('/api/close', function(request, response) {
 });
 
 app.listen(3000, function() {
-    console.log('Example app listening on port 3000!')
+    console.log('Example app listening on http://localhost:3000!')
 });

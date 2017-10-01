@@ -33,11 +33,9 @@ describe('app.js', function() {
             // console.log("web3.InsuranceContractFactory.address ", web3.InsuranceContractFactory.address )
             let contract = contractCollection.findOne({ 'address': _addr });
             assert(contract.insurer == _insurer);
-
             done();
         })
     });
-
 
     it('setDefaultFlightDelayContract', function() {
         this.timeout(20000);
@@ -51,7 +49,6 @@ describe('app.js', function() {
 
             let contract = contractCollection.findOne({ 'address': _addr });
             assert(contract.oracle == web3.Oracle.address);
-
             done();
         }).catch(reason => {
             console.log(reason);
@@ -64,7 +61,6 @@ describe('app.js', function() {
 
             let contract = contractCollection.findOne({ 'address': _addr });
             assert(contract.status == "requested");
-
             done();
         })
     });
@@ -74,8 +70,6 @@ describe('app.js', function() {
 
             let contract = contractCollection.findOne({ 'address': _addr });
             assert(contract.oracle == web3.Oracle.address);
-
-
             done();
         })
     });
@@ -85,8 +79,6 @@ describe('app.js', function() {
 
             let contract = contractCollection.findOne({ 'address': _addr });
             assert(contract.status == "active");
-
-
             done();
         })
     });
@@ -94,7 +86,6 @@ describe('app.js', function() {
     it('trigger', function(done) {
         this.timeout(30000); // falls events nicht geworfen werden beendet timer den test
         app.trigger().then(res => {
-
             done();
         })
     });
@@ -118,5 +109,4 @@ describe('app.js', function() {
         assert(contract.paid == _price);
         done();
     });
-
 });

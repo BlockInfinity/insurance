@@ -13,7 +13,6 @@ instanceOracle.Query(function(error, result) {
     } else { throw error; }
 })
 
-
 function requestApi(result) {
 
     let _airlinecode = result.args._airlinecode
