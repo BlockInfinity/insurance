@@ -14,12 +14,10 @@ gulp.task('kill', function(cb) {
     });
 });
 
-
 gulp.task('oracle', function(cb) {
     const child = spawn('nodejs', ['./oracle/oracle.js'], { detached: true, stdio: ['ignore', 'ignore', 'ignore'] });
     child.unref();
 });
-
 
 gulp.task('testrpc', function(cb) {
     const child = spawn('testrpc', ['--mnemonic', '"my test example"', '--accounts', '50'], { detached: true, stdio: ['ignore', 'ignore', 'ignore'] });
@@ -41,7 +39,6 @@ gulp.task('truffle', function(cb) {
     });
 });
 
-
 gulp.task('app', function(cb) {
     // script.js
     const child = spawn('nodejs', ['app.js']);
@@ -59,9 +56,7 @@ gulp.task('app', function(cb) {
     });
 });
 
-
 gulp.task('default', ["init"]);
-
 
 gulp.task('init', function(cb) {
     gulp.start("kill");
@@ -72,7 +67,6 @@ gulp.task('init', function(cb) {
     sleep.sleep(5);
     gulp.start("oracle");
 });
-
 
 gulp.task('run', function(cb) {
     gulp.start("kill");
@@ -85,7 +79,6 @@ gulp.task('run', function(cb) {
     sleep.sleep(5);
     gulp.start("app");
 });
-
 
 gulp.task('test', function(cb) {
     gulp.start("kill");

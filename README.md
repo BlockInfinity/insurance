@@ -1,71 +1,32 @@
-# Starten Ohne Gulp
 
- testrpc --mnemonic "my test example" --accounts 100
- cd ./truffle
- truffle deploy --network local
- cd ../app
- nodejs oracle/oracle.js
- mocha tests/app.test.js 
- nodejs app.js
- 
-=======
+# Prerequisites
 
-# Insurance App in 
+npm install
+cd app
+npm install
 
-1. testrpc starten, contracts deployen und oracle starten
-```
-cd ./app
-gulp test // führt unit tests durch
-gulp 
-```
+Open 3 terminals
 
-2. Die Contract Funktionen sind via ./app/api.js ausführbar, siehe ./app/app.js
-```
-const app = require("./api.js");
-```
+# Execute
 
+## Start TestRPC (Local lightweight Blockchain)
 
+// Terminal 1 (in any folder):
+testrpc --accounts 100
 
-# Ethereum Template (Work in progress)
+## Deploy smart contracts to TESTRPC
 
-* Falls Docker installiert ist, initial folgenden Befehl ausführen: 
+// Terminal 2 (relative to project root):
+cd ./truffle
+truffle deploy --network local
+cd ..
+node ./app/oracle/oracle.js
+mocha tests/app.test.js // optional
 
+## Start Browser App
 
-```
-./runAndBuild-all.sh
-```
+// Terminal 3 (relative to project root):
+cd app
+node app.js
 
-Damit werden alle nötigen images erstellt und die container gestartet. Der Terminal vom truffleAndApi Container öffnet sicht automatisch. Dort sind die folgenden "tmux" windows geöffnet: swagger api, testrpc, mysql und zweimal bash console. Mit ctrl + b + [0-4] kann zwischen den windows gewechselt werden.
-
-* Falls die images vorhanden sind, können mit folgendem Befehl die drei Container gestartet werden.
-
-```
-./run-all.sh
-```
-
-* Das swagger und truffle Verzeichnis wird jeweils in den "truffleAndApi" container gespiegelt. Änderungen auf dem host Computer übertragen sich unmittelbar auf den laufenden container.
-
-* Unter http://localhost:8080/docs/ läuft die swagger api. 
-
-* Truffle tests können folgendermaßen ausgeführt werden:
-
-```
-cd /src/truffle/ ; truffle test --network container
-```
-
-* Swagger api tests können folgendermaßen ausgeführt werden:
-
-```
-cd /src/swagger ; swagger project test
-```
-
-* contracts können folgendermaßen deployed werden:
-
-~~~
-cd /src/swagger ; truffle deploy --network container
-~~~
-
-* Beim Start werden automatisch alle truffle und api tests ausgeführt. 
-
-* Die Browser IDE Cloud9 ist unter http://localhost:8181/ide.html erreichbar. 
->>>>>>> f36dfd9ad6848934e266e693ff02e45265204e6a
+Open browser and go to http://localhost:3000
