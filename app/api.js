@@ -10,7 +10,7 @@ const instanceInsuranceContractFactory = web3.InsuranceContractFactory;
 const loki = require("lokijs");
 var db = new loki('loki.json')
 var contractCollection = db.addCollection('contractCollection')
-var _accessToken = "5974c487e13d641c70f5dbdaa1a9f570";
+var _accessToken = "456339bf02f958ef1b8fe4bf9b16bc79";
 
 module.exports = {
 

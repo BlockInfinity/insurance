@@ -38,9 +38,13 @@ function requestApi(result) {
     };
 
     function callback(error, response, body) {
-        if (!error && response && response.statusCode == 200) {
+        if (!error && response && response.statusCode == 200 && body) {
             let info = JSON.parse(body);
-            instanceFlightDelayContract.__callback(id, info[0].flight.flightStatus)
+            console.log(info)
+            if (info[0] && info[0].flight)
+                instanceFlightDelayContract.__callback(id, info[0].flight.flightStatus)
+            else 
+                instanceFlightDelayContract.__callback(id, 'unknwown')
         }
     }
 
