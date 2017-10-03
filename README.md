@@ -13,10 +13,10 @@
 *Insurant: New insurance created*
 
 ![](/images/4.png)
-*Insurr: Suggest price and accept insurance contract*
+*Insurer: Suggest price and accept insurance contract*
 
 ![](/images/5.png)
-*Insurr: Insurance accepted*
+*Insurer: Insurance accepted*
 
 ![](/images/6.png)
 *Insurant: Confirm price*
@@ -33,7 +33,7 @@
 *Insurer: Insurance closed*
 
 ![](/images/10.png)
-*Insurant: Unable to confir an insurance which has been closed by the insurer*
+*Insurant: Unable to confirm an insurance which has been closed by the insurer*
 
 # Prerequisites
 
