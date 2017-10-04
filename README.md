@@ -36,8 +36,14 @@
 *Insurant: Unable to confirm an insurance which has been closed by the insurer*
 
 
+# Execute with docker
 
-# Execute via docker
+## Clone and update submodules
+
+```javascript
+git clone https://github.com/BlockInfinity/insurance.git
+git submodule update --remote --merge
+```
 
 ```
 docker-compose up 
@@ -51,6 +57,9 @@ Open browser and go to http://localhost:3002
 ## Prerequisites
 
 ```javascript
+git clone https://github.com/BlockInfinity/insurance.git
+git submodule update --remote --merge
+
 npm install -g testrpc
 cd insurance_app && npm install 
 cd insurance_oracle && npm install 
