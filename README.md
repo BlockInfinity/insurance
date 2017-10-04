@@ -1,7 +1,7 @@
 
 # Flight Delay Insurance
 
-## Create new insurance
+### Create new insurance
 
 ![](/images/1.png)
 *Home-Screen*
@@ -24,7 +24,7 @@
 ![](/images/7.png)
 *Insurant: Manually claiming insurance*
 
-## Opt-out: Close insurance by insurer
+### Opt-out: Close insurance by insurer
 
 ![](/images/8.png)
 *Insurer: Close insurance before insurant has confirmed a price*
@@ -35,42 +35,57 @@
 ![](/images/10.png)
 *Insurant: Unable to confirm an insurance which has been closed by the insurer*
 
-# Prerequisites
+
+
+# Execute via docker
+
+```
+docker-compose up 
+```
+
+Open browser and go to http://localhost:3002
+
+
+# Execute without docker
+
+## Prerequisites
 
 ```javascript
-npm install
-cd app
-npm install
+npm install -g testrpc
+cd insurance_app && npm install 
+cd insurance_oracle && npm install 
+cd insurance_testrpc && npm install 
+
 ```
 
 Open 3 terminals
 
-# Execute
+### Start TestRPC (Local lightweight Blockchain)
 
-## Start TestRPC (Local lightweight Blockchain)
+```
+testrpc --accounts 50
 
-```javascript
-// Terminal 1 (in any folder):
-testrpc --accounts 100
 ```
 
-## Deploy smart contracts to TESTRPC
+### Deploy smart contracts to TESTRPC
 
-```javascript
-// Terminal 2 (relative to project root):
-cd ./truffle
-truffle deploy --network local
-cd ..
-node ./app/oracle/oracle.js
-mocha tests/app.test.js // optional
 ```
 
-## Start Browser App
-
-```javascript
-// Terminal 3 (relative to project root):
-cd app
-node app.js
+cd insurance_contractDeployer && nodeUrl=http://localhost:8545 gulp run
 ```
 
-Open browser and go to http://localhost:3000
+### Start Oracle Serivce
+
+```
+cd insurance_oracle && nodeUrl=http://localhost:8545 gulp run
+```
+
+### Start Browser App
+
+```
+cd insurance_app && nodeUrl=http://localhost:8545 gulp run
+```
+
+
+Open browser and go to http://localhost:3002
+

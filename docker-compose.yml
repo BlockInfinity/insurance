@@ -1,0 +1,56 @@
+version: '3'
+services:
+
+  testrpc:
+    build: ./insurance_testrpc
+    image: blockinfinitykarlsruhe/insurance_testrpc
+    ports:
+     - "8545:8545"
+    container_name:  insurance_testrpc
+    restart: on-failure   
+    networks:
+      - testrpcNetwork   
+
+  contractdeployer:
+    build: ./insurance_contractDeployer/
+    image: blockinfinitykarlsruhe/insurance_contractdeployer
+    container_name: insurance_contractdeployer
+    ports:
+     - "3001:3001"           
+    links:
+      - testrpc 
+    restart: on-failure   
+    networks:
+      - testrpcNetwork   
+
+  oracle:
+    build: ./insurance_oracle
+    image: blockinfinitykarlsruhe/insurance_oracle
+    container_name: insurance_oracle          
+    links:
+      - contractdeployer
+      - testrpc 
+    restart: on-failure   
+    networks:
+      - testrpcNetwork  
+      
+  app:
+    build: ./insurance_app
+    image: blockinfinitykarlsruhe/insurance_app
+    container_name: insurance_app
+    ports:
+     - "3002:3002"           
+    links:
+      - contractdeployer
+      - testrpc
+      - oracle 
+    restart: on-failure   
+    networks:
+      - testrpcNetwork       
+
+                   
+
+networks:
+  testrpcNetwork:
+
+   
