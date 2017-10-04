@@ -1,41 +1,6 @@
 
 # Flight Delay Insurance
 
-### Create new insurance
-
-![](/images/1.png)
-*Home-Screen*
-
-![](/images/2.png)
-*Insurant: Create new insurance*
-
-![](/images/3.png)
-*Insurant: New insurance created*
-
-![](/images/4.png)
-*Insurer: Suggest price and accept insurance contract*
-
-![](/images/5.png)
-*Insurer: Insurance accepted*
-
-![](/images/6.png)
-*Insurant: Confirm price*
-
-![](/images/7.png)
-*Insurant: Manually claiming insurance*
-
-### Opt-out: Close insurance by insurer
-
-![](/images/8.png)
-*Insurer: Close insurance before insurant has confirmed a price*
-
-![](/images/9.png)
-*Insurer: Insurance closed*
-
-![](/images/10.png)
-*Insurant: Unable to confirm an insurance which has been closed by the insurer*
-
-
 # Execute with docker
 
 ## Clone and update submodules
@@ -97,4 +62,41 @@ cd insurance_app && nodeUrl=http://localhost:8545 gulp run
 
 
 Open browser and go to http://localhost:3002
+
+
+
+### Create new insurance
+
+![](/images/1.png)
+*Home-Screen*
+
+![](/images/2.png)
+*Insurant: Create new insurance*
+
+![](/images/3.png)
+*Insurant: New insurance created*
+
+![](/images/4.png)
+*Insurer: Suggest price and accept insurance contract*
+
+![](/images/5.png)
+*Insurer: Insurance accepted*
+
+![](/images/6.png)
+*Insurant: Confirm price*
+
+![](/images/7.png)
+*Insurant: Manually claiming insurance*
+
+### Opt-out: Close insurance by insurer
+
+![](/images/8.png)
+*Insurer: Close insurance before insurant has confirmed a price*
+
+![](/images/9.png)
+*Insurer: Insurance closed*
+
+![](/images/10.png)
+*Insurant: Unable to confirm an insurance which has been closed by the insurer*
+
 
