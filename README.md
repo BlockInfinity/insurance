@@ -7,6 +7,8 @@
 
 ```javascript
 git clone https://github.com/BlockInfinity/insurance.git
+
+git submodule update --init --recursive
 git submodule update --remote --merge
 ```
 
