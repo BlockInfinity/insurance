@@ -1,12 +1,15 @@
 [submodule "insurance_oracle"]
 	path = insurance_oracle
+	url = git@github.com:BlockInfinity/insurance_oracle.git
 	url = https://github.com/BlockInfinity/insurance_oracle.git
 [submodule "insurance_contractDeployer"]
 	path = insurance_contractDeployer
+	url = git@github.com:BlockInfinity/insurance_contractDeployer.git
 	url = https://github.com/BlockInfinity/insurance_contractDeployer.git
 [submodule "insurance_app"]
 	path = insurance_app
+	url = git@github.com:BlockInfinity/insurance_app.git
 	url = https://github.com/BlockInfinity/insurance_app.git
 [submodule "insurance_testrpc"]
 	path = insurance_testrpc
-	url = https://github.com/BlockInfinity/insurance_testrpc.git
+	url = git@github.com:BlockInfinity/insurance_testrpc.git
