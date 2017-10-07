@@ -1,20 +1,37 @@
 
-# Flight Delay Insurance
+# Travel Insurance
 
 # Execute with docker
 
 ## Clone and update submodules
+Do not change anything in any submodule. Changes in submodules must be made in the responding repo of the submodule.
+
+
 
 ```javascript
 git clone https://github.com/BlockInfinity/insurance.git
-
+```
+For the first "pull":
+```
 git submodule update --init --recursive
-git submodule update --remote --merge
 ```
 
+To update the submodules:
+```
+git submodule update --remote --recursive --merge
+```
+Run the whole thing (depending on the installation, a sudo might be necessary):
 ```
 docker-compose up 
 ```
+Run all container in different processes:
+```
+docker-compose up testrpc
+docker-compose up contractdeployer
+docker-compose up oracle
+docker-compose up app
+```
+
 
 Open browser and go to http://localhost:3002
 
