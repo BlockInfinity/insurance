@@ -33,6 +33,8 @@ services:
     restart: on-failure   
     networks:
       - testrpcNetwork  
+    # volumes:
+    #   - ./insurance_oracle/:/src/
       
   app:
     build: ./insurance_app
@@ -46,7 +48,9 @@ services:
       - oracle 
     restart: on-failure   
     networks:
-      - testrpcNetwork       
+      - testrpcNetwork  
+    volumes:
+      - ./insurance_app/:/src/          
 
                    
 
