@@ -2,7 +2,7 @@ version: '3'
 services:
 
   testrpc:
-    build: ./insurance_testrpc
+    build: ../insurance_testrpc
     image: blockinfinitykarlsruhe/insurance_testrpc
     ports:
      - "8545:8545"
@@ -12,7 +12,7 @@ services:
       - testrpcNetwork   
 
   contractdeployer:
-    build: ./insurance_contractDeployer/
+    build: ../insurance_contractDeployer/
     image: blockinfinitykarlsruhe/insurance_contractdeployer
     container_name: insurance_contractdeployer
     ports:
@@ -24,7 +24,7 @@ services:
       - testrpcNetwork   
 
   oracle:
-    build: ./insurance_oracle
+    build: ../insurance_oracle
     image: blockinfinitykarlsruhe/insurance_oracle
     container_name: insurance_oracle          
     links:
@@ -37,7 +37,7 @@ services:
     #   - ./insurance_oracle/:/src/
       
   app:
-    build: ./insurance_app
+    build: ../insurance_app
     image: blockinfinitykarlsruhe/insurance_app
     container_name: insurance_app
     ports:
